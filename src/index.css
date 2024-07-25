@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root{
+  background-color: var(--blackM);
   --greenM1: #22b455;
   --greenM2: #80ce87;
   --greenM3: #92e5a1;
@@ -27,18 +28,26 @@
   --cyan: #14ffec;
 }
 
+
 .darkMode {
   background: var(--blackM);
 }
-
 .lightMode {
   background: var(--whiteZinc);
 }
 
+*{
+	scrollbar-width: thin;
+	scrollbar-color:  var(--greenM1) transparent ;
+}
 
 
 
-
+@media only screen and (max-width: 1000px) {
+  .section{
+    width: 80%;
+  }
+} 
 
 
 
@@ -57,26 +66,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
 }
 
 button {

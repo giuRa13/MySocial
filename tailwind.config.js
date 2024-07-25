@@ -4,7 +4,9 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: "class",
+  darkMode: 'selector',
+  //darkMode: "class",
+  //ligthMode: "class",
   theme: {
     screens: {
       sm: "480px",
@@ -27,8 +29,19 @@ export default {
         whiteZinc: "#f4f4f5",
         lightgrey: "#dddddd",
       },
+      fontSize: {
+        sm: "14px", 
+        md: "18px", 
+        lg: "24px", 
+        xl: "32px", 
+        xxl: "40px",
+        base: "16px",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    // eslint-disable-next-line no-undef
+    require('daisyui'),
+  ],
 }
 
