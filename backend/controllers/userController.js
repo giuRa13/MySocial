@@ -9,7 +9,7 @@ const getUserProfile = async (req, res) => {
     try {
         const user = await User.findOne({username}).select("-password").select("-createdAt");
 
-        if(!user) return res.status(400).json({message: "User not found"});
+        if(!user) return res.status(404).json({message: "User not found"});
 
         res.status(200).json(user);
 
