@@ -1,17 +1,23 @@
 import { useState } from "react";
 import moonSVG from "./assets/moon.svg";
 import sunSVG from "./assets/sun.svg";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import UserPage from "./pages/UserPage";
 import PostPage from "./pages/PostPage";
 import Header from "./components/Header";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import HomePage from "./pages/HomePage";
+import AuthPage from "./pages/AuthPage";
+import { useRecoilValue } from "recoil";
+import userAtom from "./atoms/userAtom";
+import LogoutButton from "./components/LogoutButton";
 
 
 function App() {
 
   const [dark, setDark] = useState(true);
+  const user = useRecoilValue(userAtom);
 
   const darkModeHandler = () => {
     setDark(!dark);
@@ -26,7 +32,7 @@ function App() {
   return (
     <>
     <main className="w-full h-full flex flex-col items-center dark:bg-blackM bg-whiteZinc text-greenM1" >
-      <button className={`absolute top-5 right-10 w-10 h-5 md:w-12 md:h-6 rounded-2xl flex items-center
+      <button className={`absolute top-7 right-60 w-10 h-5 md:w-12 md:h-6 rounded-2xl flex items-center
       transition duration-300 focus:outline-none shadow-lg ${dark ? "bg-grayM" : "bg-lightgrey"}`}
       onClick={() =>darkModeHandler()}>     
                 
@@ -39,11 +45,27 @@ function App() {
 
       <section className="w-[50%] h-auto section">
         <Header/>
-        <ToastContainer theme="colored" position="top-center"/>
+        <ToastContainer 
+          position="top-left"
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
           <Routes>
+            <Route path="/" element={user ? <HomePage/> : <Navigate to="/auth"/>}/>
+            <Route path="/auth" element={!user ? <AuthPage/> : <Navigate to="/"/>}/>
+
             <Route path="/:username" element={<UserPage/>}/>
             <Route path="/:username/post/:pId" element={<PostPage/>}/>
           </Routes>
+
+          {user && <LogoutButton/>}
       </section>
 
     </main>

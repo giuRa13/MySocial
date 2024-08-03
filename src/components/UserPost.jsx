@@ -2,16 +2,9 @@ import { Link } from "react-router-dom";
 import avatarSVG from "../assets/avatar.svg";
 import verifiedSVG from "../assets/verified.svg";
 import threeDotsSVG from "../assets/threeDots.svg";
-import heartSVG from "../assets/heart.svg";
-import heartClickedSVG from "../assets/heartClicked.svg";
-import commentSVG from "../assets/comment.svg";
-import refreshSVG from "../assets/refresh.svg";
-import messageSVG from "../assets/message.svg";
-import { useState } from "react";
+import Actions from "./Actions";
 
 const UserPost = ({postImg, likes, replies, postTitle}) => {
-
-    const [liked, setLiked] = useState(false);
 
   return (
     <Link to={"/username/post/1"}>
@@ -52,17 +45,7 @@ const UserPost = ({postImg, likes, replies, postTitle}) => {
                 <img className="w-full" src={postImg}/>
             </div>)}
 
-            <div className="flex w-full ml-2" onClick={(e) => e.preventDefault()}>
-                <div className="flex items-center gap-3 my-2">
-                    <button className={` ${liked ? 'clicked' : ''}`}
-                    onClick={() => setLiked(!liked)}>
-                    {liked ? <img className="w-[2.5rem]" src={heartClickedSVG} alt="likeNo" /> : <img className="w-[2.5rem]" src={heartSVG} alt="likeYes" />}
-                    </button>
-                    <img  src={commentSVG} alt="comment"/>
-                    <img  src={refreshSVG} alt="reload"/>
-                    <img  src={messageSVG} alt="message"/>
-                </div>
-            </div>
+            <Actions/>
             <div className="flex items-center gap-3 mt-2 ml-2 text-grayM font-semibold">
                 <h2>{likes} Likes</h2>
                 <div className="w-1 h-1 bg-grayM rounded-full"></div>

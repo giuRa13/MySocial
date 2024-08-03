@@ -4,7 +4,7 @@ import protectRouteMiddleware from "../middlewares/protectRoute.js";
 
 const router = express.Router();
 
-router.get("/feed", protectRouteMiddleware, getFeedPost)
+router.get("/feed", protectRouteMiddleware, getFeedPost);
 router.get("/:id", getPost);
 router.post("/create", protectRouteMiddleware, createPost);
 router.delete("/:id", protectRouteMiddleware, deletePost);

@@ -29,7 +29,7 @@ const PostPage = ({postImg, likes, replies, postTitle}) => {
     </div>
 
     <div className="my-4">
-      <h3 className="text-md mb-2">post title post</h3>
+      <h3 className="text-md font-bold mb-2">{postTitle}</h3>
     </div>
 
     <div className="flex flex-col w-full gap-2">
@@ -48,11 +48,11 @@ const PostPage = ({postImg, likes, replies, postTitle}) => {
     <hr className="my-4 border-greenM1"/>
 
     <div className="flex justify-between items-center py-2">
-        <div className="items-center gap-2">
+        <div className="items-center gap-4">
           <span className="text-xl">👋</span>
-          <span className="text-greenM1">{postTitle}</span>
+          <span className="text-grayM text-lg font-semibold">Get the app to like, reply anp post!</span>
         </div>
-        <button className="rounded bg-greenM1 py-2 px-8 text-grayM hover:bg-opacity-70">
+        <button className="rounded bg-greenM1 py-2 px-8 font-semibold text-grayM hover:bg-opacity-70">
           Get
         </button>
     </div>
