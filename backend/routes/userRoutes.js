@@ -9,6 +9,6 @@ router.post("/signup", signupUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 router.post("/follow/:id", protectRouteMiddleware, followUnFollowUser);
-router.post("/update/:id", protectRouteMiddleware ,updateUser)
+router.put("/update/:id", protectRouteMiddleware ,updateUser)
 
 export default router;

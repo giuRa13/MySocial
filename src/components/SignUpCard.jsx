@@ -51,7 +51,7 @@ const SignUpCard = () => {
             SignUp
         </h1>
 
-        <form /*onSubmit={handleSignup}*/ >
+        <form>
             <div className="mt-4">
                 <label className="label p-2" >
                 <span className="text-base dark:text-greenM1 ">Full Name</span>
