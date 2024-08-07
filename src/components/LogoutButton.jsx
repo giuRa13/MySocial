@@ -1,10 +1,12 @@
 import { useSetRecoilState } from "recoil";
 import userAtom from "../atoms/userAtom";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const LogoutButton = () => {
 
     const setUser = useSetRecoilState(userAtom);
+    const navigate = useNavigate();
 
     const handleLogout = async () => {
         try {
@@ -25,6 +27,7 @@ const LogoutButton = () => {
 
             localStorage.removeItem("user-MySocial");
             setUser(null);
+            navigate("/");
 
         } catch (error) {
             console.log(error)

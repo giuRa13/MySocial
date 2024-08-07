@@ -63,7 +63,7 @@ const UpdateProfilePage = () => {
             <div className="flex w-full items-center justify-between" id="userName">
                 <div className="pl-4">
                     <div className="inline-block items-center w-24 h-24 rounded-full border-2 border-greenM1" >
-                        <img className="rounded-full w-[100%] h-[100%]" src={imgUrl || user.profilePic}/> { /*object-contain*/ }
+                        <img className="rounded-full w-[100%] h-[100%]" src={imgUrl || user.profilePic} alt=""/> { /*object-contain*/ }
                     </div>{/*user.profilePic ? user.profilePic : avatarSVG*/ } {/*imgUrl ? user.profilePic : avatarSVG */}
                 </div>
                 <div className="pr-4">
@@ -117,7 +117,7 @@ const UpdateProfilePage = () => {
             
             <div className="flex w-full mt-12 items-center justify-between">
                 <div className="px-2 w-full"> 
-                  <Link to={"/"}>
+                  <Link to={`/${user.username}`}>
                     <button type="button" className="w-full rounded bg-red py-3 font-bold text-grayM hover:bg-opacity-70"> 
                         Cancel
                     </button>

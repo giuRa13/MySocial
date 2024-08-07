@@ -7,7 +7,8 @@ import { RecoilRoot } from 'recoil'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // "StrictMode" renders every compoonent twice, ONLY IN DEVELOPMENT MODE
+  <React.StrictMode> 
     <RecoilRoot>
       <BrowserRouter>
         <App />
