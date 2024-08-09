@@ -13,6 +13,8 @@ import { useRecoilValue } from "recoil";
 import userAtom from "./atoms/userAtom";
 import LogoutButton from "./components/LogoutButton";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
+import CreatePost from "./components/CreatePost";
+
 
 
 function App() {
@@ -32,7 +34,7 @@ function App() {
 
   return (
     <>
-    <main className="w-full h-full flex flex-col items-center dark:bg-blackM bg-whiteZinc text-greenM1" >
+    <main className="w-full h-full flex flex-col items-center dark:bg-blackM bg-whiteZinc text-greenM1" id="main" >
       <button className={`absolute top-7 right-60 w-10 h-5 md:w-12 md:h-6 rounded-2xl flex items-center
       transition duration-300 focus:outline-none shadow-lg ${dark ? "bg-grayM" : "bg-lightgrey"}`}
       onClick={() =>darkModeHandler()}>     
@@ -44,7 +46,7 @@ function App() {
         </div>
       </button>
 
-      <section className="w-[50%] h-auto section">
+      <section className="w-[50%] section">
         <Header/>
         <ToastContainer 
           position="top-left"
@@ -59,15 +61,19 @@ function App() {
           theme="colored"
         />
           <Routes>
-            <Route path="/" element={user ? <HomePage/> : <Navigate to="/auth"/>}/>
+            <Route path="/" element={user ? <HomePage/>: <Navigate to="/auth"/>}/>
             <Route path="/auth" element={!user ? <AuthPage/> : <Navigate to="/"/>}/>
             <Route path="/update" element={user ? <UpdateProfilePage/> : <Navigate to="/auth"/>}/>
 
             <Route path="/:username" element={user ? <UserPage/> : <UserPage/>}/>
             <Route path="/:username/post/:pId" element={<PostPage/>}/>
-          </Routes>
 
+            
+          </Routes>
+          
           {user && <LogoutButton/>}
+          {user && <CreatePost/>}
+          
       </section>
 
     </main>

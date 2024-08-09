@@ -3,11 +3,13 @@ import UserHeader from "../components/UserHeader"
 import UserPost from "../components/UserPost"
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 
 const UserPage = () => {
 
   const [user, setUser] = useState(null);
   const {username} = useParams(); // "username" as in the endpoint
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getUser = async() => {
@@ -25,6 +27,8 @@ const UserPage = () => {
 
       } catch (error) {
           toast.error(error, {style: { background: "#d6436e", color: '#3c444c'}});
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -32,7 +36,18 @@ const UserPage = () => {
 
   }, [username]);
 
-  if(!user) return null;
+  if(!user && loading) {
+    return (
+      <Spinner/>
+    )
+  }
+  if(!user && !loading) {
+    return(<div className="flex justify-center">
+      <h1 className="flex text-lg font-semibold">User not Found</h1>
+    </div>
+    )
+  }
+
 
   return <>
  

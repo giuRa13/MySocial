@@ -17,7 +17,7 @@ const UserHeader = ({user}) => {
     const copyUrl = () => {
         const currentUrl = window.location.href;
         navigator.clipboard.writeText(currentUrl).then(() => {
-            toast("Copied to clippboard!",{style:{background: "var(--greenM2)", color: "var(--greenM4)"}})
+            toast("Copied to clippboard!",{style:{background: "#25da72", color: "var(--grayM)"}})
         });
     };
 

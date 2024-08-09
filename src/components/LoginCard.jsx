@@ -4,11 +4,13 @@ import authScreenAtom from "../atoms/authAtom"
 import { useState } from "react";
 import { toast } from "react-toastify";
 import userAtom from "../atoms/userAtom";
+import Spinner from "./Spinner";
 
 const LoginCard = () => {
 
     const setAuthScreen = useSetRecoilState(authScreenAtom);
     const setUser = useSetRecoilState(userAtom);
+    const [loading, setLoading] = useState(false);
     const [inputs, setInputs] = useState({
         username: "",
         password: "",
@@ -16,6 +18,7 @@ const LoginCard = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const res = await fetch("/api/users/login", {
                 method: "POST",
@@ -37,13 +40,20 @@ const LoginCard = () => {
 
         } catch (error) {
             console.log(error);
-        }
+        } finally {
+            setLoading(false);
+          }
     };
 
+    if( loading) {
+        return (
+          <Spinner/>
+        )
+      }
 
     
   return (
-<div className="w-[50%] flex flex-col items-center justify-center min-w-96 mx-auto ">
+<div className="w-[50%] flex flex-col items-center justify-center min-w-96 mx-auto mt-20">
     <div className="w-full p-8 rounded-lg shadow-lg dark:bg-greenM4 bg-grayM border border-1 border-greenM1">
         <h1 className="text-xxl font-bold text-center mb-6 dark:text-gray-400 text-greenM1">
             Login

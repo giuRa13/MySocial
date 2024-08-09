@@ -18,12 +18,9 @@ const UpdateProfilePage = () => {
       });
     const fileRef = useRef("");
     const {handleImageChange, imgUrl} = usePreviewImg();
-    //const [updating, setUpdating] = useState(false);
 
     const handleSubmit = async (e) => {
       e.preventDefault()
-      //if (updating) return;
-      //setUpdating(true);
       try {
         const res = await fetch(`/api/users/update/${user._id}`, {
           method: "PUT",
@@ -38,7 +35,7 @@ const UpdateProfilePage = () => {
           toast.error(data.error, {style: { background: "#d6436e", color: '#3c444c'}});
           return;
         }
-        toast.success("Profile updated successfully", {style: {background: "#33cc66", color: '#3c444c'}});
+        toast.success("Profile updated successfully", {style: {background: "#25da72", color: '#3c444c'}});
         setUser(data.user);
         localStorage.setItem("user-MySocial", JSON.stringify(data));
       } 

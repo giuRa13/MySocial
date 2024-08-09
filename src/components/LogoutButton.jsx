@@ -2,6 +2,7 @@ import { useSetRecoilState } from "recoil";
 import userAtom from "../atoms/userAtom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import logoutSVG from "../assets/logout.svg";
 
 const LogoutButton = () => {
 
@@ -35,9 +36,12 @@ const LogoutButton = () => {
     };
 
   return (
-    <button className="fixed top-5 right-10 rounded bg-red py-2 px-8 font-semibold text-grayM hover:bg-opacity-70"
+    <button className="fixed top-5 right-10 rounded bg-red py-2 px-6 font-bold text-grayM hover:bg-opacity-70"
     onClick={handleLogout}>
-        Logout
+        <div className="flex items-center">
+            <img src={logoutSVG} alt="logout"/>
+            <span className="ml-2">Logout</span>
+        </div>
     </button>
   )
 }

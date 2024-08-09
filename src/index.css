@@ -36,6 +36,17 @@
   background: var(--whiteZinc);
 }
 
+
+/*
+#main{
+  min-height: 100vh;
+}
+*/
+.section{
+  min-height: 100vh;
+}
+
+
 *{
 	scrollbar-width: thin;
 	scrollbar-color:  var(--greenM1) transparent ;
@@ -52,7 +63,6 @@
     width: 95%;
   }
 } 
-
 
 
 /*:root {
