@@ -3,7 +3,7 @@ import avatarSVG from "../assets/avatar.svg";
 import verifiedSVG from "../assets/verified.svg";
 import threeDotsSVG from "../assets/threeDots.svg";
 import Actions from "./Actions";
-
+// JUST DESIGN
 const UserPost = ({postImg, likes, replies, postTitle}) => {
 
   return (

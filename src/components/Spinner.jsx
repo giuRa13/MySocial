@@ -6,7 +6,7 @@ const Spinner = () => {
         border-b-greenM1 animate-spin'
         role='status'>
         </div>
-        <span className='ml-2'>Loading...</span>
+        <span className='ml-2 text-greenM1'>Loading...</span>
     </div>
   )
 }

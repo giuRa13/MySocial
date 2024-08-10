@@ -1,6 +1,7 @@
 
 const Modal = ({open, onClose, children}) => {
 
+
   return (
     // backdrop
     <div onClick={onClose}

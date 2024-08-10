@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom.js";
 
+
 const MAX_CHAR = 500;
 
 const CreatePost = () => {

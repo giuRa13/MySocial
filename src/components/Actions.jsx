@@ -10,8 +10,9 @@ const Actions = () => {
   const [liked, setLiked] = useState(false);
 
   return <>
-    <div className="flex w-full" onClick={(e) => e.preventDefault()}>
-        <div className="flex items-center gap-3 my-2">
+    <div className="flex flex-row" onClick={(e) => e.preventDefault()}>
+        <div className="flex  w-full gap-5 mr-2">
+ 
         <button className={` ${liked ? 'clicked' : ''}`} onClick={() => setLiked(!liked)}>
             {liked ? <img className="w-[2.5rem]" src={heartClickedSVG} alt="likeNo" /> 
             : <img className="w-[2.5rem]" src={heartSVG} alt="likeYes" />}
@@ -19,6 +20,7 @@ const Actions = () => {
         <img  src={commentSVG} alt="comment"/>
         <img  src={refreshSVG} alt="reload"/>
         <img  src={messageSVG} alt="message"/>
+
         </div>
     </div> 
   </>
