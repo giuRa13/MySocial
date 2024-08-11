@@ -9,7 +9,7 @@ router.get("/:id", getPost);
 router.post("/create", protectRouteMiddleware, createPost);
 router.delete("/:id", protectRouteMiddleware, deletePost);
 router.put("/like/:id", protectRouteMiddleware, likeUnlikePost);
-router.post("/reply/:id", protectRouteMiddleware, replyToPost);
+router.put("/reply/:id", protectRouteMiddleware, replyToPost);
 
 
 export default router;
