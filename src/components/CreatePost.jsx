@@ -2,10 +2,10 @@ import { useRef, useState } from "react";
 import usePreviewImg from "../hooks/usePreviewImg.js";
 import plusSVG from "../assets/plus.svg";
 import imageSVG from"../assets/image.svg";
-import Modal from "./Modal.jsx";
 import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom.js";
+import Modal from "./Modal.jsx";
 
 
 const MAX_CHAR = 500;
@@ -64,13 +64,13 @@ const CreatePost = () => {
             </div>
         </button>
 
-        <Modal  open={open} onClose={() =>setOpen(false)}>
+        <Modal open={open} onClose={() =>setOpen(false)}>
         <form onSubmit={handleCreatePost}>
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full p-8">
           <div className="w-full my-4">
             <h3 className="text-xl mr-auto p-2 font-bold text-greenM1">New Post</h3>
-            <textarea className="w-full p-2 bg-transparent rounded outline-none mt-4 min-h-[150px] border border-greenM1" 
-            value={postText} onChange={handleTextChange} >
+            <textarea className="w-full p-2 bg-transparent rounded outline-none mt-4 min-h-[150px] border border-greenM1 myText" 
+            value={postText} onChange={handleTextChange} placeholder="Post content..." >
             </textarea>
             <input type="file" hidden ref={imageRef} onChange={handleImageChange}/>
             <div className="flex items-center cursor-pointer w-[50%]" onClick={() => imageRef.current.click()}>
@@ -100,8 +100,7 @@ const CreatePost = () => {
             </button>
           </div>
         </div>
-        </form>       
-      
+        </form>          
       </Modal>
       </>
   )
