@@ -36,6 +36,7 @@ const SignUpCard = () => {
 
       localStorage.setItem("user-MySocial", JSON.stringify(data));
       setUser(data);
+      toast.success("Account created successfully", {style: { background: "#25da72", color: '#3c444c'}})
 
     } catch (error) {
       console.log(error);

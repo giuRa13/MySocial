@@ -5,12 +5,16 @@ import Actions from "./Actions";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { formatDistanceToNow } from "date-fns";
+import deleteSVG from "../assets/delete.svg";
+import { useRecoilValue } from "recoil";
+import userAtom from "../atoms/userAtom";
 
 
 
 const Post = ({post, postedBy}) => {
 
     const [user, setUser] = useState(null);
+    const currentUser = useRecoilValue(userAtom);
 
     useEffect(() => {
         const getUser = async () => {
@@ -33,7 +37,7 @@ const Post = ({post, postedBy}) => {
     }, [postedBy]);
 
     return (
-    <Link to={`${user?._id}`}>{/*`/${user?.username}/post/${post._id}` */}
+    <Link to={`/${user?.username}`}>{/*`/${user?.username}/post/${post._id}` */}
         <div className="flex gap-6 w-full my-[5rem] border border-greenM1 rounded-lg p-4">
 
         <div className="flex flex-col justify-between items-center">
@@ -45,18 +49,18 @@ const Post = ({post, postedBy}) => {
             <div className="relative w-[1px] h-full mt-4 mb-10 bg-greenM1"></div>
             <div className="relative w-full">
                 {post.replies.length === 0 && <h3 className="flex justify-center items-center mb-8 text-xl">😴</h3>}
-                {post.replies[2] && (
-                    <div className="w-8 h-8 rounded-full border-2 border-greenM1 p-0.5 absolute bottom-8 left-2">
-                        <img src={post.replies[2].userProfilePic || avatarSVG} alt="user avatar" className="rounded-full w-[100%] h-[100%]"/>
-                    </div>  
-                )}
                 {post.replies[1] && (
-                    <div className="w-8 h-8 min-w-8 min-h-8 rounded-full border-2 border-greenM1 p-0.5 absolute bottom-8 left-10">
+                    <div className="w-8 h-8 rounded-full border-2 border-greenM1 absolute bottom-8 left-2">
                         <img src={post.replies[1].userProfilePic || avatarSVG} alt="user avatar" className="rounded-full w-[100%] h-[100%]"/>
                     </div>  
                 )}
-                {post.replies[0] && (
-                <div className="w-8 h-8 min-w-8 min-h-8 rounded-full border-2 border-greenM1 p-0.5 absolute bottom-0 left-6">
+                {post.replies[2] && (
+                    <div className="w-8 h-8 min-w-8 min-h-8 rounded-full border-2 border-greenM1 absolute bottom-8 left-10">
+                        <img src={post.replies[2].userProfilePic || avatarSVG} alt="user avatar" className="rounded-full w-[100%] h-[100%]"/>
+                    </div>  
+                )}
+                {post.replies[post.replies.length -1] && (
+                <div className="w-8 h-8 min-w-8 min-h-8 rounded-full border-2 border-greenM1 absolute bottom-0 left-6">
                     <img src={post.replies[0].userProfilePic ||avatarSVG} alt="user avatar" className="rounded-full w-[100%] h-[100%]"/>
                 </div>  
                 )}
@@ -73,6 +77,11 @@ const Post = ({post, postedBy}) => {
                 </div>
                 <div className="flex gap-4 items-center">
                     <h3 className="font-bold text-grayM mr-2"> {formatDistanceToNow(new Date(post.createdAt))} ago</h3>
+                    {currentUser?._id === user?._id && (
+                        <button>
+                            <img src={deleteSVG} alt="trash" />
+                        </button>
+                    )}
                 </div>
             </div>
             <h3 className="text-md mb-2">{post.text}</h3>
