@@ -36,6 +36,27 @@ const Post = ({post, postedBy}) => {
         getUser();
     }, [postedBy]);
 
+    const handleDeletePost = async (e) => {
+        try {
+            e.preventDefault();  //avoid Link to...
+            if(!window.confirm("Are you sure to delete this post?")) return;
+
+            const res = await fetch(`/api/posts/${post._id}`, {
+                method: "DELETE",
+            });
+            const data = await res.json();
+            if(data.error) {
+                toast.error(data.error, {style: { background: "#d6436e", color: '#3c444c'}});
+                return;
+            }
+            toast.success("Post deleted successfully", {style: { background: "#25da72", color: '#3c444c'}});
+
+        } catch (error) {
+            toast.error(error, {style: { background: "#d6436e", color: '#3c444c'}})
+        }
+    };
+
+
     return (
     <Link to={`/${user?.username}`}>{/*`/${user?.username}/post/${post._id}` */}
         <div className="flex gap-6 w-full my-[5rem] border border-greenM1 rounded-lg p-4">
@@ -78,7 +99,7 @@ const Post = ({post, postedBy}) => {
                 <div className="flex gap-4 items-center">
                     <h3 className="font-bold text-grayM mr-2"> {formatDistanceToNow(new Date(post.createdAt))} ago</h3>
                     {currentUser?._id === user?._id && (
-                        <button>
+                        <button onClick={handleDeletePost}>
                             <img src={deleteSVG} alt="trash" />
                         </button>
                     )}

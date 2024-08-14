@@ -53,7 +53,7 @@ const LoginCard = () => {
 
     
   return (
-<div className="w-[50%] flex flex-col items-center justify-center min-w-96 mx-auto mt-20">
+<div className="w-[40%] flex flex-col items-center justify-center min-w-96 mx-auto mt-20">
     <div className="w-full p-8 rounded-lg shadow-lg dark:bg-greenM4 bg-grayM border border-1 border-greenM1">
         <h1 className="text-xxl font-bold text-center mb-6 dark:text-gray-400 text-greenM1">
             Login
