@@ -1,48 +1,115 @@
 import avatarSVG from "../assets/avatar.svg";
 import verifiedSVG from "../assets/verified.svg";
-import threeDotsSVG from "../assets/threeDots.svg";
-import Comment from "../components/Comment";
 import Actions from "../components/Actions";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import useGetUserProfile from "../hooks/useGetUserProfile";
+import Spinner from "../components/Spinner";
+import { formatDistanceToNow } from "date-fns";
+import { useNavigate, useParams } from "react-router-dom";
+import deleteSVG from "../assets/delete.svg";
+import { useRecoilValue } from "recoil";
+import userAtom from "../atoms/userAtom";
+import Comment from "../components/Comment";
 
-const PostPage = ({postImg, likes, replies, postTitle}) => {
+const PostPage = () => {
 
-  postImg = "/peter.jpg";
-  postTitle = "Post Title test test...";
+  const {user, loading} = useGetUserProfile();
+  const [post, setPost] = useState("");
+  const {pId} = useParams();
+  const currentUser = useRecoilValue(userAtom);
+  const navigate = useNavigate();
 
-  return <> 
+  useEffect(() => {
+    const getPost = async () => {
+      try {
+        const res = await fetch(`/api/posts/${pId}`);
+        const data = await res.json();
+        if(data.error) {
+          toast.error(data.error, {style: { background: "#d6436e", color: '#3c444c'}});
+          return;
+        }
+        console.log(data);
+        setPost(data);
+
+      } catch (error) {
+        toast.error(error, {style: { background: "#d6436e", color: '#3c444c'}});
+      }
+    };
+    getPost();
+  }, [pId]);
+
+  const handleDeletePost = async() => {
+    try {
+      if(!window.confirm("Are you sure to delete this post?")) return;
+
+      const res = await fetch(`/api/posts/${post._id}`, {
+          method: "DELETE",
+      });
+      const data = await res.json();
+      if(data.error) {
+          toast.error(data.error, {style: { background: "#d6436e", color: '#3c444c'}});
+          return;
+      }
+      toast.success("Post deleted successfully", {style: { background: "#25da72", color: '#3c444c'}});
+      navigate(`/${user.username}`);
+
+  } catch (error) {
+      toast.error(error, {style: { background: "#d6436e", color: '#3c444c'}})
+  }
+  };
+
+  if(!user && loading) {
+    return (
+      <Spinner/>
+    )
+  }
+
+  if(!post) return null;
+
+  return (
+  <> 
   <div className="flex flex-col w-full">
 
     <div className="flex items-center w-full">     
-      <div className="flex w-16 rounded-full border-2 border-greenM1 p-1">
-          <img src={avatarSVG} alt="user avatar"/>
-      </div>
+      { user.profilePic && (
+        <div className="inline-block items-center w-28 h-28 min-w-28 min-h-28 rounded-full border-4 border-greenM1">
+          <img src={user.profilePic} alt="avatar" className="rounded-full w-[100%] h-[100%] bg-greenM1"/>
+        </div>
+      )}
+      { !user.profilePic &&(
+        <div className="inline-block items-center w-28 h-28 min-w-28 min-h-28 rounded-full border-4 border-greenM1">
+          <img src={avatarSVG} alt="avatar" className="rounded-full w-[100%] h-[100%] p-2"/>
+        </div>
+      )}
       <div className="flex justify-between w-full ml-4">
         <div className="flex gap-2 items-center">
-          <h3 className="text-xl font-bold">Full Username</h3>
+        <h3 className="font-bold text-xl mr-2"> {user.name}</h3>
           <img src={verifiedSVG} alt="verified" />
         </div>
         <div className="flex gap-4 items-center">
-          <h3 className="text-md font-bold text-grayM">1D</h3>
-          <img src={threeDotsSVG} alt="three"/>
+          <h3 className="font-bold text-lg text-grayM mr-2"> {formatDistanceToNow(new Date(post.createdAt))} ago</h3>
+          {currentUser?._id === user._id && (
+            <button onClick={handleDeletePost}>
+              <img src={deleteSVG} alt="trash" />
+            </button>
+          )}
         </div>
       </div>           
     </div>
 
     <div className="my-4">
-      <h3 className="text-md font-bold mb-2">{postTitle}</h3>
+      <h3 className="text-md font-bold mb-2">{post.text}</h3>
     </div>
 
     <div className="flex flex-col w-full gap-2">
-      {postImg &&(
+      {post.img &&(
       <div className="border border-greenM1 rounded  overflow-hidden">
-        <img className="w-full" src={postImg}/>
+        <img className="w-full" src={post.img}/>
       </div>)}
-      < Actions/> 
-      <div className="flex items-center gap-3 ml-2 text-grayM font-semibold">
-        <h2>{likes} Likes</h2>
-        <div className="w-1 h-1 bg-grayM rounded-full"></div>
-        <h2>{replies} Replies</h2>
-      </div>          
+      <div className="flex my-8">
+        < Actions post={post}/>     
+      </div>    
     </div>
 
     <hr className="my-4 border-greenM1"/>
@@ -60,35 +127,13 @@ const PostPage = ({postImg, likes, replies, postTitle}) => {
     <hr className="my-4 border-greenM1"/>
 
   </div>
-  
-  <Comment 
-    comment="This is the content of the post..." 
-    createdAt="1D" 
-    likes={27} 
-    replies={40} 
-    username="Spiderman"/>
-  <Comment 
-    comment="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." 
-    createdAt="1W" 
-    likes={17} 
-    replies={3} 
-    username="John Cena"/>
-  <Comment 
-    comment="Test asd test tedt test comment my comment asdasd test" 
-    createdAt="2D" 
-    likes={81} 
-    replies={23} 
-    username="Peter Parker"/>
-  <Comment 
-    comment="This is the content of the post This is the content of the postThis is the content of the postThis is the content of the post..." 
-    createdAt="1W" 
-    likes={305} 
-    replies={191} 
-    username="Mary Jane"/>
 
+  {post.replies.map(reply => (
+    <Comment key={reply._id} reply={reply}/>
+  ))}
 
   </>
-  
+  )
 }
 
 export default PostPage

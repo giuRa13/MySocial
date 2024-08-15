@@ -16,7 +16,7 @@ const Header = () => {
       <div className="flex justify-center">
         <Link to={"/"}>
           <img src={pirateSVG} alt="pirateLogo"
-          className="w-[4rem] h-[4rem] cursor-pointer flex justify-center"/>
+          className="w-[5rem] h-[5rem] cursor-pointer flex justify-center"/>
         </Link>
       </div>
 
@@ -24,13 +24,13 @@ const Header = () => {
       <div className="flex flex-row justify-between  mt-0 mb-20">    
         < div className="flex ">
           <Link to={"/"}>
-            <img src={homeSVG} alt="home"/>
+            <img src={homeSVG} alt="home" className="w-[2.5rem] h-[2.5rem]"/>
           </Link>
         </div>
 
         <div className="flex">
           <Link to={`/${user.username}`}>
-            <img src={avatarSVG} alt="profilePage" className="w-[2.5rem] h-[2.5rem]"/>
+            <img src={avatarSVG} alt="profilePage" className="w-[3rem] h-[3rem]"/>
           </Link>
         </div>           
       </div>)

@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
 import Post from "../components/Post";
+import useGetUserProfile from "../hooks/useGetUserProfile";
 
 
 const UserPage = () => {
 
-  const [user, setUser] = useState(null);
+  const {user, loading} = useGetUserProfile();
   const {username} = useParams(); // "username" as in the endpoint
-  const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [fetchingPost, setFetchingPost] = useState(true);
 
@@ -31,26 +31,9 @@ const UserPage = () => {
   };
 
   useEffect(() => {
-    const getUser = async() => {
-      try {
-        const res = await fetch(`/api/users/profile/${username}`)
-        const data = await res.json();
-        console.log(data);
 
-        if(data.error) {
-          toast.error(data.error, {style: { background: "#d6436e", color: '#3c444c'}});
-          return;
-        }
-        setUser(data);
-
-      } catch (error) {
-          toast.error(error, {style: { background: "#d6436e", color: '#3c444c'}});
-      } finally {
-        setLoading(false);
-      }
-    };
-    getUser();
     getPosts();
+    
   }, [username]);
 
 

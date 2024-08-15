@@ -58,7 +58,7 @@ const Post = ({post, postedBy}) => {
 
 
     return (
-    <Link to={`/${user?.username}`}>{/*`/${user?.username}/post/${post._id}` */}
+    <Link to={`/${user?.username}/post/${post._id}` }>{/*`/${user?.username}`*/}
         <div className="flex gap-6 w-full my-[5rem] border border-greenM1 rounded-lg p-4">
 
         <div className="flex flex-col justify-between items-center">
