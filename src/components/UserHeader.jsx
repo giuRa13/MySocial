@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import avatarSVG from "../assets/avatar.svg";
+import verifiedSVG from "../assets/verified.svg";
 import twitterSVG from "../assets/twitter.svg";
 import moreSVG from "../assets/more.svg";
 import { useState } from "react";
@@ -28,10 +29,11 @@ const UserHeader = ({user}) => {
 
         <div className="flex justify-between items-center w-full">
             <div className="flex flex-col gap-2">
-                <div className="flex">
+                <div className="flex items-center">
                     <h2 className="font-bold text-xxl">
                         {user.name}
                     </h2>
+                    <img src={verifiedSVG} alt="verified" className="h-[3rem] items-center ml-2"/>
                 </div>
                 <div className="flex">
                     <h3 className="font-semibold text-md">
@@ -43,12 +45,12 @@ const UserHeader = ({user}) => {
                 </div>
             </div>
             { user.profilePic && (
-                <div className="inline-block items-center w-28 h-28 rounded-full border-4 border-greenM1">
+                <div className="inline-block items-center w-32 h-32 rounded-full border-4 border-greenM1" id="header-responsive1">
                     <img src={user.profilePic} alt="avatar" className="rounded-full w-[100%] h-[100%] bg-greenM1"/>
                 </div>
             )}
             { !user.profilePic &&(
-            <div className="inline-block items-center w-28 h-28 rounded-full border-4 border-greenM1">
+            <div className="inline-block items-center w-32 h-32 rounded-full border-4 border-greenM1" id="header-responsive1">
                 <img src={avatarSVG} alt="avatar" className="rounded-full w-[100%] h-[100%] p-2"/>
             </div>
             )}
@@ -57,13 +59,13 @@ const UserHeader = ({user}) => {
 
         {currentUser?._id === user._id && (
             <Link to={"/update"} className="mr-auto">
-                <button className="rounded bg-greenM1 py-2 px-4 font-semibold text-grayM hover:bg-opacity-70">
+                <button className="rounded bg-greenM1 py-2 px-4 font-bold text-grayM hover:bg-opacity-70">
                     Update profile
                 </button>
             </Link>
         )}
         {currentUser?._id !== user._id && 
-            <button className="rounded bg-greenM1 py-2 px-8 font-semibold text-grayM hover:bg-opacity-70 mr-auto"
+            <button className="rounded bg-greenM1 py-2 px-8 font-bold text-grayM hover:bg-opacity-70 mr-auto"
             onClick={handleFollowUnfollow}>
                 {following ? "Unfollow" : "Follow"}
             </button>
@@ -104,7 +106,7 @@ const UserHeader = ({user}) => {
                     <h2 className="text-lg font-bold mb-2">Post</h2>
             </div>
             <div className="flex w-[50%] justify-center border-b-2 border-b-grayM text-grayM cursor-pointer
-            hover:bg-greenM1 hover:bg-opacity-40">
+            hover:bg-greenM1 hover:text-greenM1 hover:border-b-greenM1 hover:bg-opacity-40">
                 <h2 className="text-lg font-bold mb-2">Replies</h2>
             </div>
         </div>

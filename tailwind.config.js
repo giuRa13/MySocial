@@ -9,6 +9,7 @@ export default {
   //ligthMode: "class",
   theme: {
     screens: {
+      xsm: "350px",
       sm: "480px",
       md: "768px",
       lg: "1100px",

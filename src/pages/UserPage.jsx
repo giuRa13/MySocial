@@ -5,13 +5,15 @@ import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
 import Post from "../components/Post";
 import useGetUserProfile from "../hooks/useGetUserProfile";
+import { useRecoilState } from "recoil";
+import postsAtom from "../atoms/postsAtom";
 
 
 const UserPage = () => {
 
   const {user, loading} = useGetUserProfile();
   const {username} = useParams(); // "username" as in the endpoint
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useRecoilState(postsAtom);
   const [fetchingPost, setFetchingPost] = useState(true);
 
   const getPosts = async () => {
@@ -34,7 +36,7 @@ const UserPage = () => {
 
     getPosts();
     
-  }, [username]);
+  }, [username, setPosts]);
 
 
   if(!user && loading) {

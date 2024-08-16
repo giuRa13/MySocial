@@ -1,18 +1,19 @@
-//import { useRecoilValue } from "recoil"
-//import userAtom from "../atoms/userAtom"
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
 import Post from "../components/Post";
+import { useRecoilState } from "recoil";
+import postsAtom from "../atoms/postsAtom";
 
 const HomePage = () => {
 
-  //const currentUser = useRecoilValue(userAtom);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useRecoilState(postsAtom);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getFeedPosts = async() => {
+      setLoading(true);
+      setPosts([]); // for no see posts before homepage when go to homepage
       try {
         const res = await fetch("/api/posts/feed");
         const data = await res.json();
@@ -30,7 +31,7 @@ const HomePage = () => {
       }
     };
     getFeedPosts();
-    }, []);
+    }, [setPosts]);
 
 
   return (

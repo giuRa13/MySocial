@@ -6,15 +6,16 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { formatDistanceToNow } from "date-fns";
 import deleteSVG from "../assets/delete.svg";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
-
+import postsAtom from "../atoms/postsAtom";
 
 
 const Post = ({post, postedBy}) => {
 
     const [user, setUser] = useState(null);
     const currentUser = useRecoilValue(userAtom);
+    const [posts, setPosts] = useRecoilState(postsAtom);
 
     useEffect(() => {
         const getUser = async () => {
@@ -50,6 +51,7 @@ const Post = ({post, postedBy}) => {
                 return;
             }
             toast.success("Post deleted successfully", {style: { background: "#25da72", color: '#3c444c'}});
+            setPosts(posts.filter((p) => p._id !== post._id));
 
         } catch (error) {
             toast.error(error, {style: { background: "#d6436e", color: '#3c444c'}})
@@ -89,14 +91,14 @@ const Post = ({post, postedBy}) => {
         </div>
 
         <div className="flex flex-col w-full gap-2">
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full" id="post-responsive">
                 <div className="flex flex-row items-center">
                     <Link to={`/${user?.username}`} className="flex items-center">
                     <h3 className="text-md font-bold">{user?.name}</h3>
                     <img src={verifiedSVG} alt="verified"className="ml-2"/>
                     </Link>
                 </div>
-                <div className="flex gap-4 items-center">
+                <div className="flex gap-4 items-center" id="post-responsive2">
                     <h3 className="font-bold text-grayM mr-2"> {formatDistanceToNow(new Date(post.createdAt))} ago</h3>
                     {currentUser?._id === user?._id && (
                         <button onClick={handleDeletePost}>

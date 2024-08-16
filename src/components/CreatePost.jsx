@@ -3,9 +3,11 @@ import usePreviewImg from "../hooks/usePreviewImg.js";
 import plusSVG from "../assets/plus.svg";
 import imageSVG from"../assets/image.svg";
 import { toast } from "react-toastify";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom.js";
 import Modal from "./Modal.jsx";
+import postsAtom from "../atoms/postsAtom.js";
+import { useParams } from "react-router-dom";
 
 
 const MAX_CHAR = 500;
@@ -17,6 +19,8 @@ const CreatePost = () => {
     const {handleImageChange, imgUrl, setImgUrl} = usePreviewImg();
     const imageRef = useRef(null);
     const user = useRecoilValue(userAtom);
+    const [posts, setPosts] = useRecoilState(postsAtom);
+    const {username} = useParams();
 
 
     const handleTextChange = (e) => {
@@ -44,8 +48,12 @@ const CreatePost = () => {
           return;
         }
         toast.success("Post created successfully", {style: { background: "#25da72", color: '#3c444c'}});
+        if(username === user.username) { // for creating post in another userpage
+          setPosts([data, ...posts]);
+        }
         setPostText("");
         setImgUrl("");
+        
 
       } catch (error) {
         console.log(error);
@@ -55,7 +63,7 @@ const CreatePost = () => {
 
   return (
     <>
-        <button id="postBtn" type="button" className="fixed top-40 right-10 flex justify-center rounded 
+        <button id="postBtn" type="button" className="fixed top-28 right-10 flex justify-center rounded 
         bg-greenM1 py-2 px-8 font-bold text-grayM hover:bg-opacity-70"
         onClick={() => setOpen(true)}>
             <div className="flex items-center">

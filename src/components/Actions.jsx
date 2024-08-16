@@ -5,16 +5,17 @@ import refreshSVG from "../assets/refresh.svg";
 import messageSVG from "../assets/message.svg";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
 import Modal from "./Modal.jsx";
+import postsAtom from "../atoms/postsAtom.js";
 
 
-const Actions = ({post: post_}) => {
+const Actions = ({post}) => {
   
   const user = useRecoilValue(userAtom);
-  const [liked, setLiked] = useState(post_.likes.includes(user?._id));
-  const [post, setPost] = useState(post_);
+  const [liked, setLiked] = useState(post.likes.includes(user?._id));
+  const [posts, setPosts] = useRecoilState(postsAtom);
   const [isLiking, setIsLiking] = useState(false); // optimization
   const [isReplying, setIsReplying] = useState(false);
 
@@ -40,9 +41,21 @@ const Actions = ({post: post_}) => {
       }
       if(!liked){
         //add current user id to likes array
-        setPost({...post, likes: [...post.likes, user._id]}) 
+        const updatedPosts = posts.map((p) => {
+          if (p._id === post._id) {
+            return {...p, likes: [...p.likes, user._id]};
+          }
+          return p;
+        })
+        setPosts(updatedPosts);
       } else {
-        setPost({...post,likes: post.likes.filter(id => id !== user._id)});
+        const updatedPosts = posts.map((p) => {
+          if (p._id === post._id) {
+            return {...p, likes: p.likes.filter((id) => id !== user._id)};
+          }
+          return p;
+        })
+        setPosts(updatedPosts);
       }
       setLiked(!liked);
       console.log(data);
@@ -72,7 +85,13 @@ const Actions = ({post: post_}) => {
       if(data.error) {
         toast.error(data.error, {style: { background: "#d6436e", color: '#3c444c'}});
       }
-      setPost({...post, replies: [...post.replies, data.replyText]});
+      const updatedPosts = posts.map((p) => {
+        if (p._id === post._id) {
+          return {...p, replies: [...p.replies, data]};
+        }
+        return p;
+      })
+      setPosts(updatedPosts);
       toast.success("Reply posted successfully",{style: { background: "#25da72", color: '#3c444c'}});
       setReplyText("");
       setOpen(false);
@@ -86,21 +105,22 @@ const Actions = ({post: post_}) => {
 
   
   return <>
-    <div className="flex flex-row w-full justify-between items-center" onClick={(e) => e.preventDefault()} >
-      <div className="flex w-full items-center gap-3 ml-2 text-grayM font-bold" >
+    <div className="flex flex-row w-full justify-between items-center" id="action-responsive"
+    onClick={(e) => e.preventDefault()} >
+      <div className="flex w-full items-center gap-3 ml-2 text-grayM font-bold">
                 <h2>{post.replies.length} Replies</h2>
                 <div className="w-1 h-1 bg-grayM rounded-full"></div>
                 <h2>{post.likes.length} Likes</h2>
             </div>
 
-        <div className="flex justify-end w-full items-center gap-5 mr-2">
+        <div className="flex justify-end w-full items-center mr-2 gap-5" id="action-responsive2">
           <button className={` ${liked ? 'clicked' : ''}`} onClick={handleLikeUnlike}>
-              {liked ? <img className="w-[2.5rem]" src={heartClickedSVG} alt="likeNo" /> 
-              : <img className="w-[2.5rem]" src={heartSVG} alt="likeYes" />}
+              {liked ? <img className="w-[2.5rem] min-w-[1.5rem]" src={heartClickedSVG} alt="likeNo" /> 
+              : <img className="w-[2.5rem] min-w-[1.5rem]" src={heartSVG} alt="likeYes" id="action-responsive3"/>}
           </button>
-          <img  src={commentSVG} alt="comment" onClick={() => setOpen(true)}/>
-          <Repost/>
-          <Share/>
+          <img  src={commentSVG} alt="comment" id="action-responsive3" onClick={() => setOpen(true)}/>
+          <Repost />
+          <Share />
         </div>
     </div> 
 
@@ -147,12 +167,12 @@ export default Actions;
 
 const Repost = () =>  {
   return(
-    <img  src={refreshSVG} alt="repost"/>
+    <img  src={refreshSVG} alt="repost" id="action-responsive3"/>
   )
 };
 
 const Share = () =>  {
   return(
-    <img  src={messageSVG} alt="share"/>
+    <img  src={messageSVG} alt="share" id="action-responsive3"/>
   )
 };
