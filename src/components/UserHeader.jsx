@@ -46,7 +46,7 @@ const UserHeader = ({user}) => {
             </div>
             { user.profilePic && (
                 <div className="inline-block items-center w-32 h-32 rounded-full border-4 border-greenM1" id="header-responsive1">
-                    <img src={user.profilePic} alt="avatar" className="rounded-full w-[100%] h-[100%] bg-greenM1"/>
+                    <img src={user.profilePic} alt="avatar" className="rounded-full w-[100%] h-[100%]"/>
                 </div>
             )}
             { !user.profilePic &&(

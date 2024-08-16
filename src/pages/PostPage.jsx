@@ -77,7 +77,7 @@ const PostPage = () => {
     <div className="flex items-center w-full">     
       { user.profilePic && (
         <div className="inline-block items-center w-28 h-28 min-w-28 min-h-28 rounded-full border-4 border-greenM1" id="postPage1">
-          <img src={user.profilePic} alt="avatar" className="rounded-full w-[100%] h-[100%] bg-greenM1"/>
+          <img src={user.profilePic} alt="avatar" className="rounded-full w-[100%] h-[100%] "/>
         </div>
       )}
       { !user.profilePic &&(

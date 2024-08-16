@@ -8,7 +8,7 @@ const Comment = ({reply}) => {
     <div className="flex gap-4 py-2 my-2 w-full">
 
       <Link to={`/${reply.username}`}>
-        <img src={reply.userProfilePic || avatarSVG} alt="user avatar" className="flex w-12 h-12 rounded-full border-2 border-greenM1"/>
+        <img src={reply.userProfilePic || avatarSVG} alt="user avatar" className="flex w-12 h-12 min-w-12 min-h-12 rounded-full border-2 border-greenM1"/>
       </Link>  
         <div className="w-full gap-1 flex flex-col">
             <div className="flex justify-between items-center w-full">

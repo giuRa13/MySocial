@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import generateTokenAndSetCookie from "../utils/generateTokenAndSetCookie.js";
 import {v2 as cloudinary} from "cloudinary";
 import mongoose from "mongoose";
+import Post from "../models/postModel.js";
+
 
 
 const getUserProfile = async (req, res) => {
@@ -176,6 +178,20 @@ const followUnFollowUser = async (req, res) => {
         user.bio = bio || user.bio;
 
         user = await user.save();
+
+        // solve problem when updating User couse in replies there is "userProfilePic" not "profilePic"...
+        // (find all posts that user replied and update "username" and "userProfilePic" fields)
+        await Post.updateMany( 
+            {"replies.userId":userId},
+            {
+                $set:{
+                    "replies.$[reply].username":user.username,
+                    "replies.$[reply].userProfilePic":user.profilePic,
+                }
+            },
+            {arrayFilters:[{"reply.userId":userId}]}
+        );
+        
         user.password = null; // so not showing the password in the response
         res.status(200).json({user});
 
