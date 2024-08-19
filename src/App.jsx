@@ -11,10 +11,7 @@ import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import { useRecoilValue } from "recoil";
 import userAtom from "./atoms/userAtom";
-import LogoutButton from "./components/LogoutButton";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
-import CreatePost from "./components/CreatePost";
-
 
 
 function App() {
@@ -35,7 +32,7 @@ function App() {
   return (
     <>
     <main className="w-full h-full flex flex-col items-center dark:bg-blackM bg-whiteZinc text-greenM1" id="main" >
-      <button className={`absolute top-7 right-80 w-10 h-5 md:w-12 md:h-6 rounded-2xl flex items-center
+      <button className={`fixed top-16 left-40 w-10 h-5 md:w-12 md:h-6 rounded-2xl flex items-center
       transition duration-300 focus:outline-none shadow-lg ${dark ? "bg-grayM" : "bg-lightgrey"}`}
       onClick={() =>darkModeHandler()}>     
                 
@@ -46,7 +43,9 @@ function App() {
         </div>
       </button>
 
-      <section className="w-[50%] section">
+
+      <section className="w-[100%] section">
+      
         <Header/>
         <ToastContainer 
           position="top-left"
@@ -60,6 +59,7 @@ function App() {
           pauseOnHover
           theme="colored"
         />
+
           <Routes>
             <Route path="/" element={user ? <HomePage/>: <Navigate to="/auth"/>}/>
             <Route path="/auth" element={!user ? <AuthPage/> : <Navigate to="/"/>}/>
@@ -70,9 +70,6 @@ function App() {
 
             
           </Routes>
-          
-          {user && <LogoutButton/>}
-          {user && <CreatePost/>}
  
           
       </section>

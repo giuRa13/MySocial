@@ -46,7 +46,7 @@ const SignUpCard = () => {
 
   
   return (
-<div className="w-[45%] flex flex-col items-center justify-center min-w-96 mx-auto ">
+<div className="w-[25%] px-12 flex flex-col items-center justify-center min-w-96 mx-auto" id="signup">
     <div className="w-full p-6 rounded-lg shadow-lg dark:bg-greenM4 bg-grayM border border-1 border-greenM1">
         <h1 className="text-xxl font-bold text-center mb-6 dark:text-gray-400 text-greenM1">
             SignUp

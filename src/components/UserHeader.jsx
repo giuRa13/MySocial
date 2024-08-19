@@ -25,7 +25,7 @@ const UserHeader = ({user}) => {
 
 
   return (
-    <div className="flex flex-col items-center gap-8">
+    <div className="flex flex-col items-center gap-8" id="userheader-responsive">
 
         <div className="flex justify-between items-center w-full">
             <div className="flex flex-col gap-2">
@@ -45,12 +45,12 @@ const UserHeader = ({user}) => {
                 </div>
             </div>
             { user.profilePic && (
-                <div className="inline-block items-center w-32 h-32 rounded-full border-4 border-greenM1" id="header-responsive1">
+                <div className="inline-block items-center w-32 h-32 min-w-24 min-h-24 rounded-full border-4 border-greenM1" id="header-responsive1">
                     <img src={user.profilePic} alt="avatar" className="rounded-full w-[100%] h-[100%]"/>
                 </div>
             )}
             { !user.profilePic &&(
-            <div className="inline-block items-center w-32 h-32 rounded-full border-4 border-greenM1" id="header-responsive1">
+            <div className="inline-block items-center w-32 h-32 min-w-24 min-h-24 rounded-full border-4 border-greenM1" id="header-responsive1">
                 <img src={avatarSVG} alt="avatar" className="rounded-full w-[100%] h-[100%] p-2"/>
             </div>
             )}

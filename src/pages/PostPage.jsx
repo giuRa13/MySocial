@@ -1,4 +1,5 @@
 import avatarSVG from "../assets/avatar.svg";
+import homeSVG from "../assets/home.svg";
 import verifiedSVG from "../assets/verified.svg";
 import Actions from "../components/Actions";
 import { useEffect } from "react";
@@ -6,12 +7,13 @@ import { toast } from "react-toastify";
 import useGetUserProfile from "../hooks/useGetUserProfile";
 import Spinner from "../components/Spinner";
 import { formatDistanceToNow } from "date-fns";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import deleteSVG from "../assets/delete.svg";
 import { useRecoilState, useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
 import Comment from "../components/Comment";
 import postsAtom from "../atoms/postsAtom";
+import LogoutButton from "../components/LogoutButton";
 
 const PostPage = () => {
 
@@ -72,7 +74,24 @@ const PostPage = () => {
 
   return (
   <> 
-  <div className="flex flex-col w-full">
+  <div className="fixed top-6 right-20">
+      <LogoutButton/>
+  </div>
+
+  <div className="flex flex-col w-[50%] mx-auto" id="postPage">
+    <div className="flex flex-row justify-between  mt-0 mb-20">    
+      < div className="flex ">
+        <Link to={"/"}>
+          <img src={homeSVG} alt="home" className="w-[2.5rem] h-[2.5rem]"/>
+        </Link>
+      </div>
+
+      <div className="flex">
+        <Link to={`/${user.username}`}>
+          <img src={avatarSVG} alt="profilePage" className="w-[3rem] h-[3rem]"/>
+        </Link>
+      </div>           
+    </div>
 
     <div className="flex items-center w-full">     
       { user.profilePic && (

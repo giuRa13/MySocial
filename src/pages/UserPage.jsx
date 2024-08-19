@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react"
 import UserHeader from "../components/UserHeader"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
 import Post from "../components/Post";
 import useGetUserProfile from "../hooks/useGetUserProfile";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import postsAtom from "../atoms/postsAtom";
+import LogoutButton from "../components/LogoutButton";
+import avatarSVG from "../assets/avatar.svg";
+import homeSVG from "../assets/home.svg";
+import userAtom from "../atoms/userAtom";
 
 
 const UserPage = () => {
@@ -15,6 +19,7 @@ const UserPage = () => {
   const {username} = useParams(); // "username" as in the endpoint
   const [posts, setPosts] = useRecoilState(postsAtom);
   const [fetchingPost, setFetchingPost] = useState(true);
+  const userProfile = useRecoilValue(userAtom);
 
   const getPosts = async () => {
     setFetchingPost(true);
@@ -53,8 +58,27 @@ const UserPage = () => {
 
 
   return <>
- 
+    <div className="w-[50%] mx-auto" id="userPage">
+     
+      <div className="flex flex-row justify-between  mt-0 mb-20">    
+        < div className="flex ">
+          <Link to={"/"}>
+            <img src={homeSVG} alt="home" className="w-[2.5rem] h-[2.5rem]"/>
+          </Link>
+        </div>
+
+        <div className="flex">
+          <Link to={`/${userProfile.username}`}>
+            <img src={avatarSVG} alt="profilePage" className="w-[3rem] h-[3rem]"/>
+          </Link>
+        </div>           
+      </div>
+
     <UserHeader user={user}/>   
+
+    <div className="fixed top-6 right-20">
+      <LogoutButton/>
+    </div>
 
     {!fetchingPost &&  posts.length === 0 &&(
       <div className="flex justify-center mt-12">
@@ -72,7 +96,7 @@ const UserPage = () => {
     {posts.map((post) => (
       <Post key={post._id} post={post} postedBy={post.postedBy}/>
     ))}
-
+  </div>
   </>
 }
 

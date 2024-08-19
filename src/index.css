@@ -50,6 +50,7 @@
   min-height: 100vh;
 }
 
+
 *{
 	scrollbar-width: thin;
 	scrollbar-color:  var(--greenM1) transparent ;
@@ -62,17 +63,74 @@ textarea.myText::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 
 @media only screen and (max-width: 1100px) {
   .section{
+    width: 100%;
+  }
+} 
+@media only screen and (max-width: 1100px) {
+  #userPage{
+    width: 80%;
+  }
+  #postPage{
     width: 80%;
   }
 } 
+@media only screen and (max-width: 470px) {
+  #userPage{
+    width: 90%;
+  }
+  #postPage{
+    width: 90%;
+  }
+} 
+@media only screen and (max-width: 1800px) {
+  #login{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #signup{
+    padding-left: 0;
+    padding-right: 0;
+  }
+} 
+
+/*Sidebar*/
+@media only screen and (max-width: 880px) {
+  #sidebar{
+    max-width: 10%;
+    background-color: none;
+    border: 0;
+    padding-top: 0;
+  }
+  #menus{
+    visibility: hidden;
+  }
+} 
 @media only screen and (max-width: 450px) {
-  .section{
-    width: 95%;
+  #sidebar{
+    padding: 0;
+  }
+}
+
+
+/*Home Page*/
+@media only screen and (max-width: 600px) {
+  #homePage{
+    width: 85%;
+  }
+  #homePage1{
+    gap: 1;
+  }
+  #menu{
+    width: 15%;
+  }
+  #suggestedUser{
+    width: 0%;
+    display: none ;
   }
 } 
 
 /*Post*/
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 900px) {
   #action-responsive{
     display: block;
   }

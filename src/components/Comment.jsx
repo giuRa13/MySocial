@@ -5,7 +5,7 @@ const Comment = ({reply}) => {
 
   return (
     <>
-    <div className="flex gap-4 py-2 my-2 w-full">
+    <div className="flex gap-4 py-2 my-2 w-[50%] mx-auto" id="postPage">
 
       <Link to={`/${reply.username}`}>
         <img src={reply.userProfilePic || avatarSVG} alt="user avatar" className="flex w-12 h-12 min-w-12 min-h-12 rounded-full border-2 border-greenM1"/>
@@ -16,9 +16,9 @@ const Comment = ({reply}) => {
             </div>
             <p>{reply.text}</p>        
         </div>
-
+        
     </div>
-    <hr className="my-4 border-greenM1"/>
+    <hr className="my-4 border-greenM1 w-[50%] mx-auto" id="postPage"/>
     </>
   )
 }

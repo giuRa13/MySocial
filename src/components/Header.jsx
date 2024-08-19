@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import pirateSVG from "../assets/pirate.svg";
-import homeSVG from "../assets/home.svg";
-import avatarSVG from "../assets/avatar.svg";
-import { useRecoilValue } from "recoil";
-import userAtom from "../atoms/userAtom";
+//import homeSVG from "../assets/home.svg";
+//import avatarSVG from "../assets/avatar.svg";
+//import { useRecoilValue } from "recoil";
+//import userAtom from "../atoms/userAtom";
 
 
 const Header = () => {
 
-  const user = useRecoilValue(userAtom);
+  //const user = useRecoilValue(userAtom);
 
   return (
-    <div className=" justify-center mt-20 mb-10">
+    <div className="w-full justify-center mt-20 mb-10" id="header-responsive">
 
       <div className="flex justify-center">
         <Link to={"/"}>
@@ -20,7 +20,7 @@ const Header = () => {
         </Link>
       </div>
 
-      {user && (
+      {/*{user && (
       <div className="flex flex-row justify-between  mt-0 mb-20">    
         < div className="flex ">
           <Link to={"/"}>
@@ -34,7 +34,7 @@ const Header = () => {
           </Link>
         </div>           
       </div>)
-      }
+      }*/}
 
      </div>
   )

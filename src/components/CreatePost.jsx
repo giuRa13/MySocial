@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import usePreviewImg from "../hooks/usePreviewImg.js";
-import plusSVG from "../assets/plus.svg";
 import imageSVG from"../assets/image.svg";
 import { toast } from "react-toastify";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -8,6 +7,7 @@ import userAtom from "../atoms/userAtom.js";
 import Modal from "./Modal.jsx";
 import postsAtom from "../atoms/postsAtom.js";
 import { useParams } from "react-router-dom";
+import plusSVG from "../assets/plusSide.svg";
 
 
 const MAX_CHAR = 500;
@@ -63,14 +63,11 @@ const CreatePost = () => {
 
   return (
     <>
-        <button id="postBtn" type="button" className="fixed top-28 right-10 flex justify-center rounded 
-        bg-greenM1 py-2 px-8 font-bold text-grayM hover:bg-opacity-70"
+        <div id="postBtn" className=" flex justify-center items-center rounded  font-bold"
         onClick={() => setOpen(true)}>
-            <div className="flex items-center">
-                <img src={plusSVG} alt="plus" className=""/>
-                <span className="ml-2">Post</span>
-            </div>
-        </button>
+            <img src={plusSVG} alt="plus" id="menus-img" className="h-[2.5rem] w-[2.5rem] min-h-[2rem] min-w-[2rem]"/>
+            <span className="flex items-center ml-4" id="menus">New Post</span>
+        </div>
 
         <Modal open={open} onClose={() =>setOpen(false)}>
         <form onSubmit={handleCreatePost}>

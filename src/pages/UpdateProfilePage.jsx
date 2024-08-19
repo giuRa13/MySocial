@@ -50,7 +50,7 @@ const UpdateProfilePage = () => {
     }, [user] );
 
   return (
-    <div className="w-[50%] flex flex-col items-center justify-center min-w-96 mx-auto my-12">
+    <div className="w-[25%] flex flex-col items-center justify-center min-w-96 mx-auto my-12">
     <div className="w-full p-6 rounded-lg shadow-lg dark:bg-greenM4 bg-grayM border border-1 border-greenM1">
         <h1 className="text-xxl font-bold text-center mb-6 dark:text-gray-400 text-greenM1">
             User Profile Edit
