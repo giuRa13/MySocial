@@ -15,10 +15,10 @@ const Sidebar = () => {
 
 
   return (
-    <div className="rounded duration-300 min-h-screen p-5 pt-0 fixed justify-center" id="sidebar">
+    <div className="min-h-screen p-5 pt-0 fixed justify-center ml-12" id="sidebar">
 
         <Link to={"/"}>
-            <div className="flex mb-6 gap-4 text-md font-semibold items-center cursor-pointer p-2 rounded-md md:hover:bg-greenM2 ">
+            <div className="flex mb-6 gap-4 text-md font-semibold items-center cursor-pointer p-2 rounded-md md:hover:bg-greenM2 w-full">
                 <img src={homeSvg} className="h-[2.5rem] w-[2.5rem] min-h-[2rem] min-w-[2rem]" id="menus-img"/>
                 <span id="menus">Homepage</span>
             </div>

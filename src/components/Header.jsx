@@ -11,7 +11,7 @@ const Header = () => {
   //const user = useRecoilValue(userAtom);
 
   return (
-    <div className="w-full justify-center mt-20 mb-10" id="header-responsive">
+    <div className="w-full justify-center mt-16 mb-6" id="header-responsive">
 
       <div className="flex justify-center">
         <Link to={"/"}>

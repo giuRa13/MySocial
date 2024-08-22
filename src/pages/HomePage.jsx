@@ -5,6 +5,7 @@ import Post from "../components/Post";
 import { useRecoilState } from "recoil";
 import postsAtom from "../atoms/postsAtom";
 import Sidebar from "../components/Sidebar";
+import SuggestedUsers from "../components/SuggestedUsers";
 
 const HomePage = () => {
 
@@ -60,8 +61,8 @@ const HomePage = () => {
         ) )}
         </div>
 
-        <div className="flex flex-col w-[20%] min-h-screen" id="suggestedUser">
-          Suggested User
+        <div className="flex flex-col w-[20%] min-h-screen" id="suggestedUsers"> 
+          <SuggestedUsers/>
         </div>
       
       </div>

@@ -32,7 +32,7 @@ function App() {
   return (
     <>
     <main className="w-full h-full flex flex-col items-center dark:bg-blackM bg-whiteZinc text-greenM1" id="main" >
-      <button className={`fixed top-16 left-40 w-10 h-5 md:w-12 md:h-6 rounded-2xl flex items-center
+      <button className={`fixed top-10 right-40 w-10 h-5 md:w-12 md:h-6 rounded-2xl flex items-center
       transition duration-300 focus:outline-none shadow-lg ${dark ? "bg-grayM" : "bg-lightgrey"}`}
       onClick={() =>darkModeHandler()}>     
                 

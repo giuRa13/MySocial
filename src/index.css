@@ -94,12 +94,21 @@ textarea.myText::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 } 
 
 /*Sidebar*/
-@media only screen and (max-width: 880px) {
+@media only screen and (max-width: 1200px) {
   #sidebar{
+    margin-left: 0;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  #sidebar{
+    width: 10%;
     max-width: 10%;
-    background-color: none;
-    border: 0;
-    padding-top: 0;
+    margin-left: 0;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  #menu{
+    width: 10%;
   }
   #menus{
     visibility: hidden;
@@ -111,19 +120,58 @@ textarea.myText::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   }
 }
 
+/*Suggested User*/
+@media only screen and (max-width: 1700px) {
+  #suggested{
+    padding-left: 0;
+    align-items: start;
+  }
+  /*#suggested-name{
+    margin-left: 0;
+  }
+  #followBtn{
+    margin-left: 0;
+  }*/
+}
+@media only screen and (max-width: 1400px) {
+  #suggested-name{
+    margin-left: 6px;
+  }
+  #followBtn{
+    margin-left: 6px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  #suggested{
+    padding-left: 0;
+    align-items: start;
+  }
+  #users{
+    margin-left: 0;
+    align-items: start;
+  }
+  #who{
+    align-items: start;
+  }
+  #followBtn{
+    display: none;
+  }
+}
 
 /*Home Page*/
+@media only screen and (max-width: 800px) {
+  #homePage1{
+    gap: 1rem;
+  }
+}
 @media only screen and (max-width: 600px) {
   #homePage{
     width: 85%;
   }
-  #homePage1{
-    gap: 1;
-  }
   #menu{
     width: 15%;
   }
-  #suggestedUser{
+  #suggestedUsers{
     width: 0%;
     display: none ;
   }
@@ -144,6 +192,11 @@ textarea.myText::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   }
   #post-responsive2{
     justify-content: space-between;
+  }
+} 
+@media only screen and (max-width: 400px) {
+  #post{
+    border: none;
   }
 } 
 @media only screen and (max-width: 370px) {
