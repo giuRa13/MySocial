@@ -12,6 +12,7 @@ import AuthPage from "./pages/AuthPage";
 import { useRecoilValue } from "recoil";
 import userAtom from "./atoms/userAtom";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
+import ChatPage from "./pages/ChatPage";
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
   return (
     <>
     <main className="w-full h-full flex flex-col items-center dark:bg-blackM bg-whiteZinc text-greenM1" id="main" >
-      <button className={`fixed top-10 right-40 w-10 h-5 md:w-12 md:h-6 rounded-2xl flex items-center
+      <button id="mode-toggle" className={`fixed top-10 left-32 w-10 h-5 md:w-12 md:h-6 rounded-2xl flex items-center
       transition duration-300 focus:outline-none shadow-lg ${dark ? "bg-grayM" : "bg-lightgrey"}`}
       onClick={() =>darkModeHandler()}>     
                 
@@ -61,12 +62,13 @@ function App() {
         />
 
           <Routes>
-            <Route path="/" element={user ? <HomePage/>: <Navigate to="/auth"/>}/>
-            <Route path="/auth" element={!user ? <AuthPage/> : <Navigate to="/"/>}/>
-            <Route path="/update" element={user ? <UpdateProfilePage/> : <Navigate to="/auth"/>}/>
+            <Route path="/" element={user ? <HomePage/>: <Navigate to={"/auth"}/>}/>
+            <Route path="/auth" element={!user ? <AuthPage/> : <Navigate to={"/"}/>}/>
+            <Route path="/update" element={user ? <UpdateProfilePage/> : <Navigate to={"/auth"}/>}/>
 
             <Route path="/:username" element={user ? <UserPage/> : <UserPage/>}/>
             <Route path="/:username/post/:pId" element={<PostPage/>}/>
+            <Route path="/chat" element={user ? <ChatPage/> : <Navigate to={"/auth"}/>}/>
 
             
           </Routes>

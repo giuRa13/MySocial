@@ -7,7 +7,7 @@ const LogoutButton = () => {
 
 
   return (
-    <button className="rounded bg-red py-2 px-6 font-bold text-grayM hover:bg-opacity-70"
+    <button className="rounded bg-red py-2 px-6 font-bold text-grayM hover:bg-opacity-70" 
     onClick={handleLogout}>
         <div className="flex items-center">
             <img src={logoutSVG} alt="logout"/>

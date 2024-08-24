@@ -76,7 +76,7 @@ const UserPage = () => {
 
     <UserHeader user={user}/>  
 
-    <div className="fixed top-8 left-44">
+    <div className="fixed top-8 right-32" id="logout-btn">
       <LogoutButton/>
     </div>
 

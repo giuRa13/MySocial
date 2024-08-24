@@ -1,14 +1,9 @@
 import { Link } from "react-router-dom";
 import pirateSVG from "../assets/pirate.svg";
-//import homeSVG from "../assets/home.svg";
-//import avatarSVG from "../assets/avatar.svg";
-//import { useRecoilValue } from "recoil";
-//import userAtom from "../atoms/userAtom";
 
 
 const Header = () => {
 
-  //const user = useRecoilValue(userAtom);
 
   return (
     <div className="w-full justify-center mt-16 mb-6" id="header-responsive">
@@ -19,6 +14,7 @@ const Header = () => {
           className="w-[5rem] h-[5rem] cursor-pointer flex justify-center"/>
         </Link>
       </div>
+
 
       {/*{user && (
       <div className="flex flex-row justify-between  mt-0 mb-20">    

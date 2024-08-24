@@ -65,7 +65,7 @@ const Post = ({post, postedBy}) => {
 
         <div className="flex flex-col justify-between items-center">
             <Link to={`/${user?.username}`}>
-            <div className="inline-block items-center w-20 h-20 min-w-20 min-h-20 rounded-full border-2 border-greenM1">
+            <div className="inline-block items-center w-20 h-20 min-w-20 min-h-20 rounded-full border-4 border-greenM1">
                 <img src={user?.profilePic || avatarSVG} alt="user avatar" className="rounded-full w-[100%] h-[100%]"/>
             </div> 
             </Link>     

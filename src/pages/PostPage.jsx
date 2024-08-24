@@ -74,7 +74,7 @@ const PostPage = () => {
 
   return (
   <> 
-  <div className="fixed top-8 left-44">
+  <div className="fixed top-8 right-32" id="logout-btn">
       <LogoutButton/>
   </div>
 
@@ -93,7 +93,8 @@ const PostPage = () => {
       </div>           
     </div>
 
-    <div className="flex items-center w-full">     
+    <div className="flex items-center w-full">   
+      <Link to={`/${user.username}`}>
       { user.profilePic && (
         <div className="inline-block items-center w-28 h-28 min-w-28 min-h-28 rounded-full border-4 border-greenM1" id="postPage1">
           <img src={user.profilePic} alt="avatar" className="rounded-full w-[100%] h-[100%] "/>
@@ -104,11 +105,14 @@ const PostPage = () => {
           <img src={avatarSVG} alt="avatar" className="rounded-full w-[100%] h-[100%] p-2"/>
         </div>
       )}
+      </Link>  
       <div className="flex justify-between w-full ml-4" id="postPage2">
+        <Link to={`/${user.username}`}>
         <div className="flex gap-2 items-center">
         <h3 className="font-bold text-xl mr-2"> {user.name}</h3>
           <img src={verifiedSVG} alt="verified" />
         </div>
+        </Link> 
         <div className="flex gap-4 items-center" id="postPage3">
           <h3 className="font-bold text-lg text-grayM mr-2"> {formatDistanceToNow(new Date(currentPost.createdAt))} ago</h3>
           {currentUser?._id === user._id && (
