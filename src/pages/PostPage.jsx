@@ -78,7 +78,7 @@ const PostPage = () => {
       <LogoutButton/>
   </div>
 
-  <div className="flex flex-col w-[50%] mx-auto" id="postPage">
+  <div className="flex flex-col w-[50%] mx-auto " id="postPage">
     <div className="flex flex-row justify-between  mt-0 mb-20">    
       < div className="flex ">
         <Link to={"/"}>
