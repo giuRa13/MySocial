@@ -29,6 +29,7 @@ export default {
         grayM: "#3c444c",
         whiteZinc: "#f4f4f5",
         lightgrey: "#dddddd",
+        lightBlue: "#6caddf",
       },
       fontSize: {
         sm: "14px", 

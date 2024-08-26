@@ -14,7 +14,8 @@ const ChatPage = () => {
 
         <div className="flex gap-6 w-full min-h-[750px] max-h-[750px]" id="chatPage2">
 
-            <div className="flex flex-col w-[40%]  p-4 dark:bg-greenM4 bg-greenM3 rounded-lg border border-1 border-greenM1" id="chatConversation">
+            <div className="flex flex-col w-[40%]  p-4 bg-greenM4 rounded-lg border border-1 border-greenM1" 
+            id="chatConversation">
                 <div className="flex w-full">
                     <form className="flex w-full items-center my-4 gap-4">
                         <input type="text" placeholder="Search..." className="w-full p-3.5 rounded-lg h-10 bg-whiteZinc dark:bg-blackM border-4 border-greenM1"/>
@@ -40,7 +41,7 @@ const ChatPage = () => {
             </div>
 
 
-            <div className="flex w-[60%] justify-center p-4 dark:bg-greenM4 bg-greenM3 rounded-lg border border-1 border-greenM1" id="chatMessage">
+            <div className="flex w-[60%] justify-center p-4 bg-greenM4 rounded-lg border border-1 border-greenM1" id="chatMessage">
                 {/*No chat selected
                 <div className="flex flex-col justify-center items-center">
                     <img className="w-[5rem] h-[5rem]" src={chatSVG} alt="chat"/>
