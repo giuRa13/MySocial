@@ -8,7 +8,7 @@ async function sendMessage(req, res) {
         const senderId = req.user._id;
 
         let conversation = await Conversation.findOne({
-            partecipants: {$all: [senderId, recipientId]},
+            participants: {$all: [senderId, recipientId]},
         });
 
         if (!conversation) { // create conversation
@@ -42,7 +42,53 @@ async function sendMessage(req, res) {
 
     } catch (error) {
         res.status(500).json({error: error.message});
+        console.log("Error in sendMessage", error.message);
     }
 }
 
-export {sendMessage}
+
+async function getMessages(req, res) {
+    const {otherUserId} = req.params;
+    const userId = req.user._id;
+    try {
+        const conversation = await Conversation.findOne({
+            participants: {$all: [userId, otherUserId]},
+        });
+
+        if(!conversation) {
+            return res.status(404).json({error: "Conversation not found"});
+        }
+
+        const messages = await Message.find({
+            conversationId: conversation._id,
+        }).sort({createdAt: 1});
+
+        res.status(200).json(messages);
+        
+    } catch (error) {
+        res.status(500).json({error: error.message});
+        console.log("Error in getMessages", error.message);
+    }
+} 
+
+
+async function getConversations(req, res) {
+    const userId = req.user._id;
+    try {
+        const conversations = await Conversation.find({participants: userId}).populate({
+            path: "participants",
+            select: "username profilePic",
+            // ( .populate({}) method ), populate the path with field taken from  ref: "User"
+        });
+
+        res.status(200).json(conversations);
+
+    } catch (error) {
+        res.status(500).json({error: error.message});
+        console.log("Error in getConversatiions", error.message);
+    }
+}
+
+
+
+export {sendMessage, getMessages, getConversations}
