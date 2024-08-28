@@ -1,13 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import searchSVG from "../assets/search.svg";
-//import chatSVG from "../assets/chat.svg";
+import chatSVG from "../assets/chat.svg";
 import Spinner from "../components/Spinner";
 import Conversation from "../components/Conversation";
 import MessageContainer from "../components/MessageContainer";
+import { toast } from "react-toastify";
+import { useRecoilState } from "recoil";
+import { conversationsAtom, selectedConversationsAtom } from "../atoms/messagesAtom";
 
 const ChatPage = () => {
 
-    const [loadingConversation] = useState(false);
+    const [loadingConversation, setLoadingConversation] = useState(true);
+    const [conversations, setConversations] = useRecoilState(conversationsAtom);
+    const [selectedConversation] = useRecoilState(selectedConversationsAtom);
+
+    useEffect(() => {
+        const getConversations = async() => {
+            try {
+                const res = await fetch("/api/messages/conversations");
+                const data = await res.json();
+                if(data.error){
+                    toast.error(data.error, {style: { background: "#d6436e", color: '#3c444c'}});
+                    return;
+                }
+                console.log(data);
+                setConversations(data);
+
+            } catch (error) {
+                toast.error(error.message, {style: { background: "#d6436e", color: '#3c444c'}});
+            } finally {
+                setLoadingConversation(false);
+            }
+        }
+        getConversations();
+    }, [setConversations])
+ 
 
   return (
     <div className="flex w-[60%] mx-auto pt-12 overflow-auto" id="chatPage">
@@ -30,24 +57,25 @@ const ChatPage = () => {
                     </div>
                 )}
                 {!loadingConversation && (
-                    <>
-                    <Conversation/>
-                    <Conversation/>
-                    <Conversation/>
-                    <Conversation/>
-                    <Conversation/>
-                    </>
+                    conversations.map(conversation => (
+                        <Conversation key={conversation._id} conversation={conversation}/>
+                    ))
                 )}
             </div>
 
-
+                     
             <div className="flex w-[60%] justify-center p-4 bg-greenM4 rounded-lg border border-1 border-greenM1" id="chatMessage">
-                {/*No chat selected
-                <div className="flex flex-col justify-center items-center">
-                    <img className="w-[5rem] h-[5rem]" src={chatSVG} alt="chat"/>
-                    <p className="font-bold text-md">Select a chat to start messaging!</p>
-                </div>*/}
-                <MessageContainer/>
+
+                {selectedConversation._id  && (
+                    <MessageContainer/>
+                )} 
+                {/*No chat selected*/}  
+                {!selectedConversation._id && (
+                    <div className="flex flex-col justify-center items-center">
+                        <img className="w-[5rem] h-[5rem]" src={chatSVG} alt="chat"/>
+                        <p className="font-bold text-md">Select a chat to start messaging!</p>
+                    </div>
+                )}                 
             </div>
 
         </div>

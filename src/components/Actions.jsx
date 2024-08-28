@@ -114,8 +114,8 @@ const Actions = ({post}) => {
             </div>
 
         <div className="flex justify-end w-full items-center mr-2 gap-5" id="action-responsive2">
-          <button className={` ${liked ? 'clicked' : ''}`} onClick={handleLikeUnlike}>
-              {liked ? <img className="w-[2.5rem] min-w-[1.5rem]" src={heartClickedSVG} alt="likeNo" /> 
+          <button  onClick={handleLikeUnlike}>
+              {liked ? <img className="w-[2.5rem] min-w-[1.5rem]" src={heartClickedSVG} alt="likeNo" id="action-responsive3" /> 
               : <img className="w-[2.5rem] min-w-[1.5rem]" src={heartSVG} alt="likeYes" id="action-responsive3"/>}
           </button>
           <img  src={commentSVG} alt="comment" id="action-responsive3" onClick={() => setOpen(true)}/>

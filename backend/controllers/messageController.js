@@ -77,8 +77,15 @@ async function getConversations(req, res) {
     try {
         const conversations = await Conversation.find({participants: userId}).populate({
             path: "participants",
-            select: "username profilePic",
+            select: "name username profilePic",
             // ( .populate({}) method ), populate the path with field taken from  ref: "User"
+        });
+
+        // remove current user from participants array (for display easier the receiver in frontend)
+        conversations.forEach(conversation => {
+            conversation.participants = conversation.participants.filter(
+                participants => participants._id.toString() !== userId.toString()
+            );
         });
 
         res.status(200).json(conversations);
