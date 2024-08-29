@@ -20,6 +20,7 @@ const ChatPage = () => {
         
     useEffect(() => {
         const getConversations = async() => {
+            setSelectedConversation([]);
             try {
                 const res = await fetch("/api/messages/conversations");
                 const data = await res.json();
@@ -69,6 +70,24 @@ const ChatPage = () => {
                 })
                 return;
             }
+
+            const mockConversation = {
+                mock:true,
+                lastMessage: {
+                    text: "",
+                    sender: "",
+                },
+                _id: Date.now(),
+                participants: [
+                    {
+                        _id: searchedUser._id,
+                        username: searchedUser.username,
+                        name: searchedUser.name,
+                        profilePic: searchedUser.profilePic,
+                    }
+                ]
+            }
+            setConversations((prevConvs) => [...prevConvs, mockConversation]);
             
 
         } catch (error) {
