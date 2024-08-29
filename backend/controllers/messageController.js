@@ -82,9 +82,9 @@ async function getConversations(req, res) {
         });
 
         // remove current user from participants array (for display easier the receiver in frontend)
-        conversations.forEach(conversation => {
+        conversations.forEach((conversation) => {
             conversation.participants = conversation.participants.filter(
-                participants => participants._id.toString() !== userId.toString()
+                (participant) => participant._id.toString() !== userId.toString()
             );
         });
 
@@ -92,7 +92,7 @@ async function getConversations(req, res) {
 
     } catch (error) {
         res.status(500).json({error: error.message});
-        console.log("Error in getConversatiions", error.message);
+        console.log("Error in getConversations", error.message);
     }
 }
 

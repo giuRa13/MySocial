@@ -16,6 +16,7 @@ const MessageContainer = () => {
   const [messages, setMessages] = useState([]);
   const currentUser = useRecoilValue(userAtom);
 
+
   useEffect(() => {
     const getMessages = async () => {
       setLoadingMessages(true);
@@ -27,6 +28,7 @@ const MessageContainer = () => {
           toast.error(data.error, {style: { background: "#d6436e", color: '#3c444c'}});
           return;
         }
+        console.log("messages",data)
         setMessages(data);
 
       } catch (error) {
@@ -44,7 +46,7 @@ const MessageContainer = () => {
         
         <div className="flex w-full h-12 items-center my-4 gap-2">
             <div className=" avatar online inline-block items-center w-16 h-16 min-w-16 min-h-16 rounded-full border-2 border-greenM1">    
-              <img src={selectedConversation.userProfilePic ||avatarSVG} alt="user" className="rounded-full w-[100%] h-[100%]"/>
+              <img src={selectedConversation.userProfilePic || avatarSVG} alt="user" className="rounded-full w-[100%] h-[100%]"/>
             </div>
             <h2 className="text-lg ml-2 font-semibold">{selectedConversation.name}</h2>
         </div>
@@ -53,13 +55,15 @@ const MessageContainer = () => {
         <div className="flex flex-col gap-4 my-4 overflow-auto">
             {loadingMessages && [...Array(7)].map((_, idx) => <MessageSkeleton key={idx}/>)}
                       
-            <div className="flex flex-col px-2">
+            
             {!loadingMessages && (
                 messages.map((message) => (
-                  <Message key={message._id} message={message} ownMessage={currentUser._id === message.sender}/>
-                ))
+                  <div className="flex flex-col px-1" key={message._id}>
+                    <Message  message={message} ownMessage={currentUser._id === message.sender}/>
+                  </div> 
+                ))          
             )}
-            </div>                        
+                                 
         </div>
         
         <div className="mt-auto">

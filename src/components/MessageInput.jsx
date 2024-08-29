@@ -9,7 +9,8 @@ const MessageInput = ({setMessages}) => {
     const [loading, setLoading] = useState(false);
     const [messageText, setMessageText] = useState("");
     const selectedConversation = useRecoilValue(selectedConversationAtom);
-    //const setConversationsChange = useRecoilState(conversationsAtom);
+    //const setConversations = useRecoilState(conversationsAtom);
+
 
     const handleSendMessage = async (e) => {
       e.preventDefault();
@@ -30,13 +31,13 @@ const MessageInput = ({setMessages}) => {
           return;
         }
         setMessages((messages) => [...messages, data]);
-
-        {/*setConversationsChange((prevConvs) => {
+        
+        {/*setConversations((prevConvs) => {
           const updatedConversations = prevConvs.map((conversation) => {
             if(conversation._id === selectedConversation._id) {
-              return{
+              return {
                 ...conversation,
-                lastMessage:{
+                lastMessage: {
                   text: messageText,
                   sender: data.sender,
                 },
@@ -64,7 +65,7 @@ const MessageInput = ({setMessages}) => {
             value={messageText}
             onChange={(e)=>setMessageText(e.target.value)}/>
             <button type="submit" className="absolute inset-y-0 end-0 flex items-center pe-4"
-            onClick={handleSendMessage}>
+            >
               {loading ?  <span className="loading loading-spinner text-greenM1"></span> 
                : <img src={planeSVG} className="w-8 h-8 hover:w-9 hover:h-9"/>}         
             </button>  
