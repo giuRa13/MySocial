@@ -2,14 +2,14 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
 import avatarSVG from "../assets/avatar.svg";
 import { BsCheck2All } from "react-icons/bs";
-import { selectedConversationsAtom } from "../atoms/messagesAtom";
+import { selectedConversationAtom } from "../atoms/messagesAtom";
 
 const Conversation = ({conversation}) => {
 
     const user = conversation.participants[0];
     const currentUser = useRecoilValue(userAtom);
     const lastMessage = conversation.lastMessage;
-    const [selectedConversation, setSelectedConversation] = useRecoilState(selectedConversationsAtom);
+    const [selectedConversation, setSelectedConversation] = useRecoilState(selectedConversationAtom);
 
     //console.log("HERE>>>", selectedConversation)
   return (

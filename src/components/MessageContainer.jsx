@@ -4,14 +4,14 @@ import Message from "./Message";
 import MessageInput from "./MessageInput";
 import MessageSkeleton from "./MessageSkeleton";
 import { toast } from "react-toastify";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { selectedConversationsAtom } from "../atoms/messagesAtom";
+import { useRecoilValue } from "recoil";
+import { selectedConversationAtom } from "../atoms/messagesAtom";
 import userAtom from "../atoms/userAtom";
 
 
 const MessageContainer = () => {
 
-  const [selectedConversation, setSelectedConversation] = useRecoilState(selectedConversationsAtom);
+  const selectedConversation = useRecoilValue(selectedConversationAtom);
   const [loadingMessages, setLoadingMessages] = useState(true);
   const [messages, setMessages] = useState([]);
   const currentUser = useRecoilValue(userAtom);
@@ -63,7 +63,7 @@ const MessageContainer = () => {
         </div>
         
         <div className="mt-auto">
-          <MessageInput/>
+          <MessageInput setMessages={setMessages} />
         </div>
         
     </div>

@@ -6,13 +6,13 @@ import Conversation from "../components/Conversation";
 import MessageContainer from "../components/MessageContainer";
 import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
-import { conversationsAtom, selectedConversationsAtom } from "../atoms/messagesAtom";
+import { conversationsAtom, selectedConversationAtom } from "../atoms/messagesAtom";
 
 const ChatPage = () => {
 
     const [loadingConversation, setLoadingConversation] = useState(true);
     const [conversations, setConversations] = useRecoilState(conversationsAtom);
-    const [selectedConversation] = useRecoilState(selectedConversationsAtom);
+    const [selectedConversation] = useRecoilState(selectedConversationAtom);
 
     useEffect(() => {
         const getConversations = async() => {
@@ -65,17 +65,17 @@ const ChatPage = () => {
 
                      
             <div className="flex w-[60%] justify-center p-4 bg-greenM4 rounded-lg border border-1 border-greenM1" id="chatMessage">
-
-                {selectedConversation._id  && (
-                    <MessageContainer/>
-                )} 
                 {/*No chat selected*/}  
                 {!selectedConversation._id && (
                     <div className="flex flex-col justify-center items-center">
                         <img className="w-[5rem] h-[5rem]" src={chatSVG} alt="chat"/>
                         <p className="font-bold text-md">Select a chat to start messaging!</p>
                     </div>
-                )}                 
+                )}   
+                
+                {selectedConversation._id  && (
+                    <MessageContainer/>
+                )}               
             </div>
 
         </div>
