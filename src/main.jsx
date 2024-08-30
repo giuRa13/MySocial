@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
+import { SocketContextProvider } from './context/SocketContext.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -11,7 +12,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode> 
     <RecoilRoot>
       <BrowserRouter>
-        <App />
+        <SocketContextProvider>
+          <App />
+        </SocketContextProvider>
       </BrowserRouter>
     </RecoilRoot>
   </React.StrictMode>,
