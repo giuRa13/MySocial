@@ -7,6 +7,7 @@ import postsAtom from "../atoms/postsAtom";
 import Sidebar from "../components/Sidebar";
 import SuggestedUsers from "../components/SuggestedUsers";
 
+
 const HomePage = () => {
 
   const [posts, setPosts] = useRecoilState(postsAtom);
@@ -62,7 +63,7 @@ const HomePage = () => {
         </div>
 
         <div className="flex flex-col w-[20%] min-h-screen" id="suggestedUsers"> 
-          <SuggestedUsers/>
+          <SuggestedUsers />
         </div>
       
       </div>

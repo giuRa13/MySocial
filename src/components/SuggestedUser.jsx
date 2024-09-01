@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import avatarSVG from "../assets/avatar.svg"
 import useFollowUnfollow from "../hooks/useFollowUnfollow"
 
-const SuggestedUser = ({user}) => {
+const SuggestedUser = ({user, isOnline}) => {
 
     const {handleFollowUnfollow, following} = useFollowUnfollow(user);
 
@@ -14,12 +14,12 @@ const SuggestedUser = ({user}) => {
             </div>*/}
          <Link to={`${user.username}`}>
         { user.profilePic && (
-            <div className="inline-block items-center w-12 h-12 min-w-12 min-h-12 rounded-full border-4 border-greenM1">
+            <div className={`${isOnline ? "online" : "offline"} avatar inline-block items-center w-12 h-12 min-w-12 min-h-12 rounded-full border-2 border-greenM1`}>
             <img src={user.profilePic} alt="avatar" className="rounded-full w-[100%] h-[100%] "/>
             </div>
         )}
         { !user.profilePic &&(
-            <div className="inline-block items-center w-12 h-12 min-w-12 min-h-12 rounded-full border-4 border-greenM1" >
+            <div className={`${isOnline ? "online" : "offline"} avatar inline-block items-center w-12 h-12 min-w-12 min-h-12 rounded-full border-2 border-greenM1`}>
             <img src={avatarSVG} alt="avatar" className="rounded-full w-[100%] h-[100%] p-2"/>
             </div>
         )}

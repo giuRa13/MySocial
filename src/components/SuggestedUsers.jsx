@@ -6,12 +6,14 @@ import avatarSVG from "../assets/avatar.svg";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
 import { Link } from "react-router-dom";
+import { useSocket } from "../context/SocketContext";
 
 const SuggestedUsers = () => {
 
     const [loading, setLoading] = useState(true);
     const [suggestedUsers, setSuggestedUsers] = useState([]);
     const user = useRecoilValue(userAtom);
+    const { onlineUsers} = useSocket();
 
     useEffect(() => {
       const getSuggestedUsers = async () => {
@@ -56,7 +58,8 @@ const SuggestedUsers = () => {
 
     <div className="flex flex-col  fixed pl-6 justify-center" id="suggested">
         <h1 className="mb-6 text-md font-bold" id="who">Who to Follow</h1>
-        {!loading && suggestedUsers.map(user => <SuggestedUser key={user._id} user={user}/>)}
+        {!loading && suggestedUsers.map(user => <SuggestedUser key={user._id} user={user} 
+        isOnline={onlineUsers.includes(user._id)}/>)}
         {loading &&
             <div className="">
                 <Spinner/>

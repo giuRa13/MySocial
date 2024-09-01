@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { conversationsAtom, selectedConversationAtom } from "../atoms/messagesAtom";
 import userAtom from "../atoms/userAtom";
+import { useSocket } from "../context/SocketContext";
 
 const ChatPage = () => {
 
@@ -17,6 +18,7 @@ const ChatPage = () => {
     const [selectedConversation, setSelectedConversation] = useRecoilState(selectedConversationAtom);
     const [searchText, setSearchText] = useState("");
     const currentUser = useRecoilValue(userAtom);
+    const { onlineUsers} = useSocket(); // ,socket
         
     useEffect(() => {
         const getConversations = async() => {
@@ -127,7 +129,8 @@ const ChatPage = () => {
                 )}
                 {!loadingConversation && (
                     conversations.map(conversation => (
-                        <Conversation key={conversation._id} conversation={conversation}/>
+                        <Conversation key={conversation._id} conversation={conversation}
+                        isOnline={onlineUsers.includes(conversation.participants[0]._id)}/>
                     ))
                 )}
             </div>

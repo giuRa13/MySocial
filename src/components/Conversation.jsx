@@ -4,7 +4,7 @@ import avatarSVG from "../assets/avatar.svg";
 import { BsCheck2All } from "react-icons/bs";
 import { selectedConversationAtom } from "../atoms/messagesAtom";
 
-const Conversation = ({conversation}) => {
+const Conversation = ({conversation, isOnline}) => {
 
     const user = conversation.participants[0];
     const currentUser = useRecoilValue(userAtom);
@@ -23,9 +23,11 @@ const Conversation = ({conversation}) => {
         userProfilePic: user.profilePic,
         mock: conversation.mock,
     })}>
-        <div className=" avatar online inline-block items-center w-16 h-16 min-w-16 min-h-16 rounded-full border-2 border-greenM1">    
-              <img src={user.profilePic || avatarSVG} alt="user" className="rounded-full w-[100%] h-[100%] bg-greenM4"/>
-        </div>
+        
+        <div className={`avatar ${isOnline ? "online" : "offline"} inline-block items-center w-16 h-16 min-w-16 min-h-16 rounded-full border-2 border-greenM1`}>    
+            <img src={user.profilePic || avatarSVG} alt="user" className="rounded-full w-[100%] h-[100%] bg-greenM4"/>
+        </div> 
+          
         <div className="flex flex-col">
             <div className="flex">
                 <span className="font-semibold text-md ml-2" id="chatUsername">{user.name}</span>
