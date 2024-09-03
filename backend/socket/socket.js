@@ -11,6 +11,10 @@ const io = new Server(server,{ //(able to handle socket.io things)
     }
 }); //create Socket Server and combining it with the Http Server
 
+export const getRecipientSocketId = (recipientId) => {
+    return userSocketMap[recipientId];
+}
+
 const userSocketMap = {} // store the users Ids in the Server in a Map-> userId:socketId 
 
 io.on("connection", (socket) => {   

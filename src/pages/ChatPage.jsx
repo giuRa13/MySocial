@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import searchSVG from "../assets/search.svg";
 import chatSVG from "../assets/chat.svg";
+import avatarSVG from "../assets/avatar.svg";
 import Spinner from "../components/Spinner";
 import Conversation from "../components/Conversation";
 import MessageContainer from "../components/MessageContainer";
@@ -29,6 +30,9 @@ const ChatPage = () => {
                 if(data.error){
                     toast.error(data.error, {style: { background: "#d6436e", color: '#3c444c'}});
                     return;
+                }
+                if(data.length === 0) {
+                    toast.warning("No conversation yet..")
                 }
                 console.log(data);
                 setConversations(data);
@@ -114,9 +118,7 @@ const ChatPage = () => {
                         <input type="text" placeholder="Search..." className="w-full p-3.5 rounded-lg h-10 bg-whiteZinc dark:bg-blackM border-4 border-greenM1"
                         onChange={(e)=>setSearchText(e.target.value)}
                         value={searchText}/>
-                        <button type="submit" className="rounded-lg p-1.5 bg-greenM1 hover:opacity-70"
-                        >
-                            {/*<img src={searchSVG} alt="search" />*/}
+                        <button type="submit" className="rounded-lg p-1.5 bg-greenM1 hover:opacity-70">
                             {loadingUser ?  <span className="loading loading-spinner text-grayM"></span> 
                             : <img src={searchSVG} />}  
                         </button>
@@ -133,6 +135,13 @@ const ChatPage = () => {
                         isOnline={onlineUsers.includes(conversation.participants[0]._id)}/>
                     ))
                 )}
+                {!loadingConversation && conversations.length === 0 &&(
+                    <div className="flex flex-col justify-center  mx-auto">
+                        <img alt="users" src={avatarSVG} className="w-[5rem] h-[5rem] mt-6 mx-auto"/>
+                        <h2 className="font-bold text-greenM1 text-md">Search for a User(username)...</h2>
+                    </div>
+                    )
+                }
             </div>
 
                      

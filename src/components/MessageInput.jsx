@@ -1,15 +1,15 @@
 import { useState } from "react";
 import planeSVG from "../assets/plane.svg";
 import { toast } from "react-toastify";
-import {  useRecoilValue } from "recoil";
-import {  selectedConversationAtom } from "../atoms/messagesAtom";
+import {   useRecoilValue, useSetRecoilState } from "recoil";
+import {   conversationsAtom, selectedConversationAtom } from "../atoms/messagesAtom";
 
 const MessageInput = ({setMessages}) => {
 
     const [loading, setLoading] = useState(false);
     const [messageText, setMessageText] = useState("");
     const selectedConversation = useRecoilValue(selectedConversationAtom);
-    //const setConversations = useRecoilState(conversationsAtom);
+    const setConversations = useSetRecoilState(conversationsAtom);
 
 
     const handleSendMessage = async (e) => {
@@ -26,14 +26,15 @@ const MessageInput = ({setMessages}) => {
           }),
         });
         const data = await res.json();
+        console.log("Data", data)
         if(data.error) {
           toast.error(data.error, {style: { background: "#d6436e", color: '#3c444c'}});
           return;
         }
         setMessages((messages) => [...messages, data]);
         
-        {/*setConversations((prevConvs) => {
-          const updatedConversations = prevConvs.map((conversation) => {
+        setConversations((prevC) => {
+          const updatedConversations = prevC.map((conversation) => {
             if(conversation._id === selectedConversation._id) {
               return {
                 ...conversation,
@@ -46,7 +47,7 @@ const MessageInput = ({setMessages}) => {
             return conversation;
           });
           return updatedConversations;
-        });*/}
+        });
         setMessageText("");
 
       } catch (error) {
