@@ -27,11 +27,7 @@ const MessageContainer = () => {
       if(selectedConversation._id === message.conversationId) {
         setMessages((prevMessages) => [...prevMessages, message]);
       }
-      if(!document.hasFocus()) {
-        const sound = new Audio(messageSound);
-        sound.play();
-      }
-
+      
       setConversations((prev) => {
         const updatedConversation = prev.map((conversation) => {
           if(conversation._id === message.conversationId) {
