@@ -8,7 +8,7 @@ const Modal = ({open, onClose, children}) => {
       ${open ? "visible" : "invisible"}`}>
 
       {/* modal */}
-      <div className={`rounded-lg shadow w-[80%] lg:w-[40%] max-h-[95vh] border border-greenM1 translation-all
+      <div className={`rounded-lg shadow w-[50%] lg:w-[40%] max-h-[95vh] border border-greenM1 translation-all
       bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 sticky
       ${open ? "scale-100 opacity-100" : "scale-125 opacity-100"}`} 
       onClick={(e) => e.stopPropagation()}

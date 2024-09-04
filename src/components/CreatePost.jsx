@@ -79,7 +79,7 @@ const CreatePost = () => {
             </textarea>
             <input type="file" hidden ref={imageRef} onChange={handleImageChange}/>
             <div className="flex items-center cursor-pointer w-[50%]" onClick={() => imageRef.current.click()}>
-              <img className="ml-5 mt-4" src={imageSVG} onClick={() => imageRef.current.click()}/>
+              <img className="ml-5 mt-4" src={imageSVG}/>
               <span className="ml-4 mt-4 font-semibold"> Add Image...</span>
             </div>
           </div>
@@ -94,7 +94,7 @@ const CreatePost = () => {
             </div>
           )}
 
-          <div className="flex ml-auto mt-8 gap-4">
+          <div className="flex ml-auto mt-8 gap-4" id="modal-buttons">
             <button type="submit"  className="bg-greenM1 text-grayM font-bold py-2 px-6 rounded hover:opacity-70"
             onClick={() => setOpen(false)}> 
               Post

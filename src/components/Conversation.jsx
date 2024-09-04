@@ -3,6 +3,7 @@ import userAtom from "../atoms/userAtom";
 import avatarSVG from "../assets/avatar.svg";
 import { BsCheck2All } from "react-icons/bs";
 import { selectedConversationAtom } from "../atoms/messagesAtom";
+import { FaRegImage } from "react-icons/fa6";
 
 const Conversation = ({conversation, isOnline}) => {
 
@@ -42,7 +43,7 @@ const Conversation = ({conversation, isOnline}) => {
                 ) : (
                   "" 
                 )}
-                    {lastMessage.text.length > 20 ? lastMessage.text.substring(0,20) + "..." : lastMessage.text}
+                    {lastMessage.text.length > 20 ? lastMessage.text.substring(0,20) + "..." : lastMessage.text || <FaRegImage />}
                 </div>
             </div>
         </div>

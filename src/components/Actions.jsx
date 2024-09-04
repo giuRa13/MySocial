@@ -135,7 +135,7 @@ const Actions = ({post}) => {
             </textarea>
           </div>
   
-          <div className="flex ml-auto mt-8 gap-4">
+          <div className="flex ml-auto mt-8 gap-4" id="modal-buttons">
             <button type="submit"  className="bg-greenM1 text-grayM font-bold py-2 px-6 rounded hover:opacity-70"
             onClick={handleReply}> 
               Post
