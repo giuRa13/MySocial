@@ -34,10 +34,16 @@ const Conversation = ({conversation, isOnline}) => {
                 <span className="font-semibold text-md ml-2" id="chatUsername2">@{user.username}</span>
             </div>
             <div className="flex ml-2">
-                <span className="flex items-center gap-1">
-                    {currentUser._id === lastMessage.sender ? <BsCheck2All size={20} /> : ""}
+                <div className="flex items-center gap-1">
+                    {currentUser._id === lastMessage.sender ?( 
+                    <div className={`${lastMessage.seen ? "text-blue-500" : ""}`}>
+                        <BsCheck2All size={20} />
+                    </div>
+                ) : (
+                  "" 
+                )}
                     {lastMessage.text.length > 20 ? lastMessage.text.substring(0,20) + "..." : lastMessage.text}
-                </span>
+                </div>
             </div>
         </div>
     </div>
