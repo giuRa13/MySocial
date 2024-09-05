@@ -1,4 +1,5 @@
 /*npm install express jsonwebtoken bcryptjs dotenv mongoose cookie-parser*/
+import path from "path";
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./db/connectDB.js";
@@ -16,6 +17,7 @@ connectDB();
 //const app = express(); //NOW app IS IN socket.js FILE   
 
 const PORT = process.env.PORT || 5000;
+const __dirname = path.resolve();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -32,6 +34,18 @@ app.use(cookieParser()); // allows to get the cookie from req and set the cookie
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/messages", messageRoutes);
+
+
+// backend, frontend on same url(localhost:5000) //npm install -g win-node-env
+if(process.env.NODE_ENV === "production") {
+  //static assets
+  app.use(express.static(path.join(__dirname, "/frontend/dist")))
+
+  //react app
+  app.get("*", (req,res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
+  })
+}
 
 
 server.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));

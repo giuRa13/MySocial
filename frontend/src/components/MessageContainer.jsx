@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import avatarSVG from "../assets/avatar.svg";
-import Message from "./Message";
-import MessageInput from "./MessageInput";
-import MessageSkeleton from "./MessageSkeleton";
+import Message from "./Message.jsx";
+import MessageInput from "./MessageInput.jsx";
+import MessageSkeleton from "./MessageSkeleton.jsx";
 import { toast } from "react-toastify";
 import {  useRecoilValue, useSetRecoilState } from "recoil";
-import {  conversationsAtom, selectedConversationAtom } from "../atoms/messagesAtom";
-import userAtom from "../atoms/userAtom";
+import {  conversationsAtom, selectedConversationAtom } from "../atoms/messagesAtom.js";
+import userAtom from "../atoms/userAtom.js";
 import { useSocket } from "../context/SocketContext.jsx";
 import messageSound from "../assets/sounds_notification.mp3"
 

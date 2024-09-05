@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import planeSVG from "../assets/plane.svg";
 import { toast } from "react-toastify";
 import {   useRecoilValue, useSetRecoilState } from "recoil";
-import {   conversationsAtom, selectedConversationAtom } from "../atoms/messagesAtom";
+import {   conversationsAtom, selectedConversationAtom } from "../atoms/messagesAtom.js";
 import Modal from "./Modal.jsx";
 import imageSVG from"../assets/image.svg";
 import usePreviewImg from "../hooks/usePreviewImg.js";

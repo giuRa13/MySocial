@@ -6,7 +6,7 @@ import messageSVG from "../assets/message.svg";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRecoilState, useRecoilValue } from "recoil";
-import userAtom from "../atoms/userAtom";
+import userAtom from "../atoms/userAtom.js";
 import Modal from "./Modal.jsx";
 import postsAtom from "../atoms/postsAtom.js";
 
